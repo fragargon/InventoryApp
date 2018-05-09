@@ -1,6 +1,4 @@
 <resources>
     <string name="app_name">InventoryApp</string>
-    <string name="header_view">The books table catalog contains </string>
-    <string name="books"> books.\n\n</string>
     <string name="table_header_view">The books table catalog contains %1$d books.\n\n</string>
 </resources>

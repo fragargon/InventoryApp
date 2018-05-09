@@ -1,15 +1,19 @@
 package com.example.android.inventoryapp;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.example.android.inventoryapp.data.BookContract.BookEntry;
 import com.example.android.inventoryapp.data.BookDbHelper;
 
 public class MainActivity extends AppCompatActivity {
+
+    private final static String LOG_TAG = "log tag values: ";
 
     // Initializing dbHelper
     private BookDbHelper dbHelper;
@@ -26,9 +30,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        insertDummyData();
         displayDatabaseInfo();
     }
 
+    /**
+     * Helper method to display the SQL information's table.
+     */
     private void displayDatabaseInfo() {
 
         // Create and/or open a database and read it.
@@ -58,12 +66,11 @@ public class MainActivity extends AppCompatActivity {
 
         // Get the view
         TextView displayView = findViewById(R.id.display_table);
-        String header = getResources().getString(R.string.header_view);
-        String books = getResources().getString(R.string.books);
+        String header = getResources().getString(R.string.table_header_view, cursor.getCount());
 
         try {
             // Create a header in the textView
-            displayView.setText(header + " " + cursor.getCount() + " " + books);
+            displayView.setText(header);
             displayView.append(BookEntry.COLUMN_KEY + " - " +
                     BookEntry.COLUMN_PRODUCT_NAME + " - " +
                     BookEntry.COLUMN_PRICE + " - " +
@@ -89,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                 String currentPhone = cursor.getString(phoneColumnIndex);
 
                 // Display the values from each column
-                displayView.append("\n" + currentId + "- " +
+                displayView.append("\n" + currentId + " - " +
                 currentProduct + " - " +
                 currentPrice + " - " +
                 currentQuantity + " - " +
@@ -101,4 +108,26 @@ public class MainActivity extends AppCompatActivity {
             cursor.close();
         }
     }
+
+    /**
+     * Helper method to insert dummy data into the SQL table
+     */
+    private void insertDummyData() {
+        // Gets the database in write mode
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+
+        // Create a ContentValue object
+        ContentValues values = new ContentValues();
+        for(int i = 0; i<10; i++) {
+            values.put(BookEntry.COLUMN_PRODUCT_NAME, "Harry Potter");
+            values.put(BookEntry.COLUMN_PRICE, 10);
+            values.put(BookEntry.COLUMN_QUANTITY, 1);
+            values.put(BookEntry.COLUMN_SUPPLIER_NAME, "FNAC");
+            values.put(BookEntry.COLUMN_SUPPLIER_PHONE, "02123456");
+            // Insert a new row into the database
+            long newRowId = database.insert(BookEntry.TABLE_NAME, null, values);
+            Log.v(LOG_TAG, "New Row Id is: " + newRowId);
+        }
+    }
+
 }

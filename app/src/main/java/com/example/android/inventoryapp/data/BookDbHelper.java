@@ -7,7 +7,7 @@ import android.util.Log;
 
 import com.example.android.inventoryapp.data.BookContract.BookEntry;
 
-public class bookDbHelper extends SQLiteOpenHelper {
+public class BookDbHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "catalog.db";
@@ -16,7 +16,7 @@ public class bookDbHelper extends SQLiteOpenHelper {
     /**
      * @param context to use to open or create the database
      */
-    public bookDbHelper(Context context) {
+    public BookDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -30,12 +30,12 @@ public class bookDbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         final String SQL_CREATE_BOOKS_TABLE = "CREATE TABLE " + BookEntry.TABLE_NAME + " (" +
-                BookEntry.COLUMN_KEY + "INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                BookEntry.COLUMN_PRODUCT_NAME + "TEXT NOT NULL, " +
-                BookEntry.COLUMN_PRICE + "INTEGER NOT NULL, " +
-                BookEntry.COLUMN_QUANTITY + "INTEGER NOT NULL DEFAULT 0, " +
-                BookEntry.COLUMN_SUPPLIER_NAME + "TEXT NOT NULL, " +
-                BookEntry.COLUMN_SUPPLIER_PHONE + "TEXT NOT NULL" + ");";
+                BookEntry.COLUMN_KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                BookEntry.COLUMN_PRODUCT_NAME + " TEXT NOT NULL, " +
+                BookEntry.COLUMN_PRICE + " INTEGER NOT NULL, " +
+                BookEntry.COLUMN_QUANTITY + " INTEGER NOT NULL DEFAULT 0, " +
+                BookEntry.COLUMN_SUPPLIER_NAME + " TEXT NOT NULL, " +
+                BookEntry.COLUMN_SUPPLIER_PHONE + " TEXT NOT NULL" + ");";
 
         db.execSQL(SQL_CREATE_BOOKS_TABLE);
 

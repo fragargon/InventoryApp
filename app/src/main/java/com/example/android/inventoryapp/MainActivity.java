@@ -13,7 +13,7 @@ import com.example.android.inventoryapp.data.BookDbHelper;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final static String LOG_TAG = "log tag values: ";
+    private final static String LOG_TAG = MainActivity.class.getSimpleName();
 
     // Initializing dbHelper
     private BookDbHelper dbHelper;

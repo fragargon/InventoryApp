@@ -27,6 +27,11 @@ public class MainActivity extends AppCompatActivity {
         dbHelper = new BookDbHelper(this);
     }
 
+    /**
+     * This method callback helper methods (insertDummyData() and displayDatabaseInfo())
+     * when activity start. The purpose is to insert dummy data and display that data
+     * within the TextView (displayView)
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -35,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Helper method to display the SQL information's table.
+     * Helper method to display the SQL information's table (books).
      */
     private void displayDatabaseInfo() {
 
@@ -46,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         String[] projection = {
                 BookEntry.COLUMN_KEY,
                 BookEntry.COLUMN_PRODUCT_NAME,
+                BookEntry.COLUMN_PRODUCT_TITLE,
                 BookEntry.COLUMN_PRICE,
                 BookEntry.COLUMN_QUANTITY,
                 BookEntry.COLUMN_SUPPLIER_NAME,
@@ -73,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
             displayView.setText(header);
             displayView.append(BookEntry.COLUMN_KEY + " - " +
                     BookEntry.COLUMN_PRODUCT_NAME + " - " +
+                    BookEntry.COLUMN_PRODUCT_TITLE + " - " +
                     BookEntry.COLUMN_PRICE + " - " +
                     BookEntry.COLUMN_QUANTITY + " - " +
                     BookEntry.COLUMN_SUPPLIER_NAME + " - " +
@@ -81,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
             // Index of each column
             int idColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_KEY);
             int productColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_PRODUCT_NAME);
+            int titleColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_PRODUCT_TITLE);
             int priceColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_PRICE);
             int quantityColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_QUANTITY);
             int supplierColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_SUPPLIER_NAME);
@@ -90,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
             while (cursor.moveToNext()) {
                 int currentId = cursor.getInt(idColumnIndex);
                 String currentProduct = cursor.getString(productColumnIndex);
+                String currentTitle = cursor.getString(titleColumnIndex);
                 int currentPrice = cursor.getInt(priceColumnIndex);
                 int currentQuantity = cursor.getInt(quantityColumnIndex);
                 String currentSupplier = cursor.getString(supplierColumnIndex);
@@ -98,7 +107,8 @@ public class MainActivity extends AppCompatActivity {
                 // Display the values from each column
                 displayView.append("\n" + currentId + " - " +
                 currentProduct + " - " +
-                currentPrice + " - " +
+                currentTitle + " - " +
+                currentPrice + "€" + " - " +
                 currentQuantity + " - " +
                 currentSupplier + " - " +
                 currentPhone);
@@ -110,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Helper method to insert dummy data into the SQL table
+     * Helper method to insert dummy data into the SQL table (books)
      */
     private void insertDummyData() {
         // Gets the database in write mode
@@ -118,8 +128,11 @@ public class MainActivity extends AppCompatActivity {
 
         // Create a ContentValue object
         ContentValues values = new ContentValues();
+
+        // Loop 10 time to insert dummy data in the table (books).
         for(int i = 0; i<10; i++) {
             values.put(BookEntry.COLUMN_PRODUCT_NAME, "Harry Potter");
+            values.put(BookEntry.COLUMN_PRODUCT_TITLE, "Philosopher's Stone");
             values.put(BookEntry.COLUMN_PRICE, 10);
             values.put(BookEntry.COLUMN_QUANTITY, 1);
             values.put(BookEntry.COLUMN_SUPPLIER_NAME, "FNAC");

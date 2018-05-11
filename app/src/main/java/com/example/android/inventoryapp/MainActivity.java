@@ -126,6 +126,9 @@ public class MainActivity extends AppCompatActivity {
         // Gets the database in write mode
         SQLiteDatabase database = dbHelper.getWritableDatabase();
 
+        // delete rows so no more than 10 records are displayed
+        database.delete(BookEntry.TABLE_NAME, null, null);
+
         // Create a ContentValue object
         ContentValues values = new ContentValues();
 

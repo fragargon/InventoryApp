@@ -20,5 +20,6 @@ public final class BookContract {
         public final static String COLUMN_QUANTITY = "quantity";
         public final static String COLUMN_SUPPLIER_NAME = "name";
         public final static String COLUMN_SUPPLIER_PHONE = "phone";
+        public final static String COLUMN_SUPPLIER_EMAIL = "email";
     }
 }

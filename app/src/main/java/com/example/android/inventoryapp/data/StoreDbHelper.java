@@ -5,9 +5,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.android.inventoryapp.data.BookContract.BookEntry;
+import com.example.android.inventoryapp.data.StoreContract.StoreEntry;
 
-public class BookDbHelper extends SQLiteOpenHelper {
+public class StoreDbHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "catalog.db";
@@ -16,7 +16,7 @@ public class BookDbHelper extends SQLiteOpenHelper {
     /**
      * @param context to use to open or create the database
      */
-    public BookDbHelper(Context context) {
+    public StoreDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -29,20 +29,20 @@ public class BookDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        final String SQL_CREATE_BOOKS_TABLE = "CREATE TABLE " + BookEntry.TABLE_NAME + " (" +
-                BookEntry.COLUMN_KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                BookEntry.COLUMN_PRODUCT_TITLE + " TEXT NOT NULL, " +
-                BookEntry.COLUMN_PRODUCT_NAME + " TEXT NOT NULL, " +
-                BookEntry.COLUMN_PRICE + " REAL NOT NULL, " +
-                BookEntry.COLUMN_QUANTITY + " INTEGER NOT NULL DEFAULT 0, " +
-                BookEntry.COLUMN_SUPPLIER_NAME + " TEXT NOT NULL, " +
-                BookEntry.COLUMN_SUPPLIER_PHONE + " TEXT NOT NULL, " +
-                BookEntry.COLUMN_SUPPLIER_EMAIL + " TEXT NOT NULL" + ");";
+        final String SQL_CREATE_STORE_TABLE = "CREATE TABLE " + StoreEntry.TABLE_NAME + " (" +
+                StoreEntry.COLUMN_KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                StoreEntry.COLUMN_PRODUCT_TITLE + " TEXT NOT NULL, " +
+                StoreEntry.COLUMN_PRODUCT_NAME + " TEXT NOT NULL, " +
+                StoreEntry.COLUMN_PRICE + " REAL NOT NULL, " +
+                StoreEntry.COLUMN_QUANTITY + " INTEGER NOT NULL DEFAULT 0, " +
+                StoreEntry.COLUMN_SUPPLIER_NAME + " TEXT NOT NULL, " +
+                StoreEntry.COLUMN_SUPPLIER_PHONE + " TEXT NOT NULL, " +
+                StoreEntry.COLUMN_SUPPLIER_EMAIL + " TEXT NOT NULL" + ");";
 
-        db.execSQL(SQL_CREATE_BOOKS_TABLE);
+        db.execSQL(SQL_CREATE_STORE_TABLE);
 
         // Log the table creation
-        Log.v(LOG_TAG, SQL_CREATE_BOOKS_TABLE);
+        Log.v(LOG_TAG, SQL_CREATE_STORE_TABLE);
 
     }
 
@@ -55,7 +55,7 @@ public class BookDbHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-        db.execSQL("DROP TABLE IF EXISTS " + BookEntry.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + StoreEntry.TABLE_NAME);
         onCreate(db);
 
     }

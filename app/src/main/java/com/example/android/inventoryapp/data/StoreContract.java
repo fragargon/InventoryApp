@@ -2,15 +2,15 @@ package com.example.android.inventoryapp.data;
 
 import android.provider.BaseColumns;
 
-public final class BookContract {
+public final class StoreContract {
 
-    /** Create a private constructor because no one should ever create a {@link BookContract} object. */
-    private BookContract() {}
+    /** Create a private constructor because no one should ever create a {@link StoreContract} object. */
+    private StoreContract() {}
 
-    public static final class BookEntry implements BaseColumns {
+    public static final class StoreEntry implements BaseColumns {
 
         // Table name
-        public final static String TABLE_NAME = "books";
+        public final static String TABLE_NAME = "catalog";
 
         // Column name
         public final static String COLUMN_KEY = BaseColumns._ID;

@@ -9,9 +9,14 @@ import com.example.android.inventoryapp.data.StoreContract.StoreEntry;
 
 public class StoreDbHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "catalog.db";
+    // Tag for the log messages
     private static final String LOG_TAG = "Create SQL table: ";
+
+    // Database version
+    private static final int DATABASE_VERSION = 1;
+
+    // Database name
+    private static final String DATABASE_NAME = "catalog.db";
 
     /**
      * @param context to use to open or create the database

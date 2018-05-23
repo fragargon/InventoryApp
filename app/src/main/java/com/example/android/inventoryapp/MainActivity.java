@@ -1,27 +1,31 @@
 package com.example.android.inventoryapp;
 
-import android.content.ContentValues;
+import android.app.LoaderManager;
+import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.Loader;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
+import com.example.android.inventoryapp.adapter.StoreCursorAdapter;
 import com.example.android.inventoryapp.data.StoreContract.StoreEntry;
-import com.example.android.inventoryapp.data.StoreDbHelper;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements
+        LoaderManager.LoaderCallbacks<Cursor> {
 
-    private final static String LOG_TAG = MainActivity.class.getSimpleName();
+    // Initialize the loader id.
+    private static final int STORE_LOADER = 0;
 
-    // Initializing dbHelper
-    private StoreDbHelper dbHelper;
+    // Initialize various class
+    StoreCursorAdapter cursorAdapter;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,20 +42,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Instantiation the subClass of the SQLiteOpenHelper
-        dbHelper = new StoreDbHelper(this);
-    }
+        // Find the ListView which will be populated with the item's catalog.
+        ListView listView = findViewById(R.id.list_view);
+        // Setup an Adapter to create a list item for each rows of catalog data.
+        cursorAdapter = new StoreCursorAdapter(this, null);
+        listView.setAdapter(cursorAdapter);
 
-    /**
-     * This method callback helper methods (insertDummyData() and displayDatabaseInfo())
-     * when activity start. The purpose is to insert dummy data and display that data
-     * within the TextView (displayView)
-     */
-    @Override
-    protected void onStart() {
-        super.onStart();
-        insertDummyData();
-        displayDatabaseInfo();
+        // Setup an item click listener.
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // TODO
+            }
+        });
+
+        // Kick off the loader.
+        getLoaderManager().initLoader(STORE_LOADER, null, null);
     }
 
     /**
@@ -84,115 +90,53 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Helper method to display the SQL information's table (books).
+     * Instantiate and return a new Loader for the given ID.
+     *
+     * @param id   The ID whose loader is to be created.
+     * @param args Any arguments supplied by the caller.
+     * @return Return a new Loader instance that is ready to start loading.
      */
-    private void displayDatabaseInfo() {
-
-        // Create and/or open a database and read it.
-        SQLiteDatabase database = dbHelper.getReadableDatabase();
-
-        // get a string array of the database's column name
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        // Define a projection that specifies which column the database
+        // will be displayed after this query.
         String[] projection = {
                 StoreEntry.COLUMN_KEY,
                 StoreEntry.COLUMN_PRODUCT_NAME,
                 StoreEntry.COLUMN_PRODUCT_TITLE,
-                StoreEntry.COLUMN_PRICE,
-                StoreEntry.COLUMN_QUANTITY,
-                StoreEntry.COLUMN_SUPPLIER_NAME,
-                StoreEntry.COLUMN_SUPPLIER_PHONE,
-                StoreEntry.COLUMN_SUPPLIER_EMAIL};
+                StoreEntry.COLUMN_QUANTITY};
 
-        // Create a Cursor object with all the table's content
-        Cursor cursor = database.query(
-                StoreEntry.TABLE_NAME,
-                projection,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-        );
-
-        // Get the view
-        TextView displayView = findViewById(R.id.display_table);
-        String header = getResources().getString(R.string.table_header_view, cursor.getCount());
-
-        try {
-            // Create a header in the textView
-            displayView.setText(header);
-            displayView.append(StoreEntry.COLUMN_KEY + " - " +
-                    StoreEntry.COLUMN_PRODUCT_NAME + " - " +
-                    StoreEntry.COLUMN_PRODUCT_TITLE + " - " +
-                    StoreEntry.COLUMN_PRICE + " - " +
-                    StoreEntry.COLUMN_QUANTITY + " - " +
-                    StoreEntry.COLUMN_SUPPLIER_NAME + " - " +
-                    StoreEntry.COLUMN_SUPPLIER_PHONE +
-                    StoreEntry.COLUMN_SUPPLIER_EMAIL +"\n");
-
-            // Index of each column
-            int idColumnIndex = cursor.getColumnIndex(StoreEntry.COLUMN_KEY);
-            int productColumnIndex = cursor.getColumnIndex(StoreEntry.COLUMN_PRODUCT_NAME);
-            int titleColumnIndex = cursor.getColumnIndex(StoreEntry.COLUMN_PRODUCT_TITLE);
-            int priceColumnIndex = cursor.getColumnIndex(StoreEntry.COLUMN_PRICE);
-            int quantityColumnIndex = cursor.getColumnIndex(StoreEntry.COLUMN_QUANTITY);
-            int supplierColumnIndex = cursor.getColumnIndex(StoreEntry.COLUMN_SUPPLIER_NAME);
-            int phoneColumnIndex = cursor.getColumnIndex(StoreEntry.COLUMN_SUPPLIER_PHONE);
-            int emailColumnIndex = cursor.getColumnIndex(StoreEntry.COLUMN_SUPPLIER_EMAIL);
-
-            // Iterate through all the return rows from idColumnIndex.
-            while (cursor.moveToNext()) {
-                int currentId = cursor.getInt(idColumnIndex);
-                String currentProduct = cursor.getString(productColumnIndex);
-                String currentTitle = cursor.getString(titleColumnIndex);
-                int currentPrice = cursor.getInt(priceColumnIndex);
-                int currentQuantity = cursor.getInt(quantityColumnIndex);
-                String currentSupplier = cursor.getString(supplierColumnIndex);
-                String currentPhone = cursor.getString(phoneColumnIndex);
-                String currentEmail = cursor.getString(emailColumnIndex);
-
-                // Display the values from each column
-                displayView.append("\n" + currentId + " - " +
-                currentProduct + " - " +
-                currentTitle + " - " +
-                currentPrice + "€" + " - " +
-                currentQuantity + " - " +
-                currentSupplier + " - " +
-                currentPhone + " - " +
-                currentEmail);
-            }
-
-        } finally {
-            cursor.close();
-        }
+        // This Loader will execute the ContentProvider's query method on a background thread.
+        return new CursorLoader(this,   // parent activity context
+                StoreEntry.CONTENT_URI,         // provider content uri to query
+                projection,                     // columns to include in the resulting cursor
+                null,                   // no selection clause
+                null,               // no selection args
+                null);                  // default sort order
     }
 
     /**
-     * Helper method to insert dummy data into the SQL table (books)
+     *
+     * @param loader The Loader that has finished.
+     * @param data   The data generated by the Loader.
      */
-    private void insertDummyData() {
-        // Gets the database in write mode
-        SQLiteDatabase database = dbHelper.getWritableDatabase();
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        // Update {@link #StoreCursorAdapter} with this new cursor.
+        cursorAdapter.swapCursor(data);
 
-        // delete rows so no more than 10 records are displayed
-        database.delete(StoreEntry.TABLE_NAME, null, null);
-
-        // Create a ContentValue object
-        ContentValues values = new ContentValues();
-
-        // Loop 10 time to insert dummy data in the table (books).
-        for(int i = 0; i<10; i++) {
-            values.put(StoreEntry.COLUMN_PRODUCT_NAME, "Harry Potter");
-            values.put(StoreEntry.COLUMN_PRODUCT_TITLE, "Philosopher's Stone");
-            values.put(StoreEntry.COLUMN_PRICE, 10);
-            values.put(StoreEntry.COLUMN_QUANTITY, 1);
-            values.put(StoreEntry.COLUMN_SUPPLIER_NAME, "FNAC");
-            values.put(StoreEntry.COLUMN_SUPPLIER_PHONE, "02123456");
-            values.put(StoreEntry.COLUMN_SUPPLIER_EMAIL, "adresse@domain.com");
-            // Insert a new row into the database
-            long newRowId = database.insert(StoreEntry.TABLE_NAME, null, values);
-            Log.v(LOG_TAG, "New Row Id is: " + newRowId);
-        }
     }
 
+    /**
+     * Called when a previously created loader is being reset, and thus
+     * making its data unavailable.  The application should at this point
+     * remove any references it has to the Loader's data.
+     *
+     * @param loader The Loader that is being reset.
+     */
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        cursorAdapter.swapCursor(null);
+
+    }
 }

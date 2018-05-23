@@ -84,7 +84,7 @@ public class StoreProvider extends ContentProvider {
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection,
                         @Nullable String[] selectionArgs, @Nullable String sortOrder) {
-        // Create and/or open a databse to read from it.
+        // Create and/or open a database to read from it.
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         // This Cursor will hold the result of the query.
@@ -162,6 +162,7 @@ public class StoreProvider extends ContentProvider {
         final int match = uriMatcher.match(uri);
         switch (match) {
             case CATALOG:
+                //TODO
         }
         return null;
     }

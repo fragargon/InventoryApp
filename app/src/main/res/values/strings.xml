@@ -46,8 +46,4 @@
     <string name="product_title_5">Cell Phone</string>
     <string name="product_title_6">SmartPhone</string>
 
-    <!-- Label for editor button [CHAR LIMIT=20] -->
-    <string name="button_add">add</string>
-    <string name="button_remove">del</string>
-
 </resources>

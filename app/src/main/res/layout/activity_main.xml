@@ -23,7 +23,7 @@
         android:orientation="vertical">
 
         <TextView
-            style="@style/text_card_view"
+            style="@style/main_text_view"
             android:textStyle="bold"
             android:textSize="20sp"
             android:text="@string/empty_inventory"/>
@@ -31,14 +31,15 @@
         <ImageView
             android:layout_width="@dimen/value_256"
             android:layout_height="@dimen/value_256"
-            android:src="@drawable/empty_shop"/>
+            android:src="@drawable/empty_shop"
+            android:contentDescription="@string/content_description"/>
 
         <TextView
-            style="@style/text_card_view"
+            style="@style/main_text_view"
             android:text="@string/empty_view_info"/>
 
         <TextView
-            style="@style/text_card_view"
+            style="@style/main_text_view"
             android:text="@string/empty_view_action"
             android:gravity="center"/>
 
@@ -50,7 +51,6 @@
         android:layout_height="wrap_content"
         app:rippleColor="@color/colorAccent"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="@dimen/value_16"
         android:src="@drawable/ic_action_add"/>

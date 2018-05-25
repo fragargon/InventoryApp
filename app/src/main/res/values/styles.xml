@@ -9,11 +9,33 @@
         <item name="cardViewStyle">@style/CardView</item>
     </style>
 
-    <!-- TextView style cardView-->
-    <style name="text_card_view">
+    <!-- common TextView style -->
+    <style name="main_text_view">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="editor_text_view">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <!-- Common EditTextStyle -->
+    <style name="edit_text">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">3</item>
+    </style>
+
+    <!-- common LinearLayout editor-->
+    <style name="edit_linear_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_marginBottom">@dimen/value_8</item>
     </style>
 
 </resources>

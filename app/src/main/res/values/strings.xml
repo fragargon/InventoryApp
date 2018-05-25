@@ -2,6 +2,9 @@
     <!-- Name for the application [CHAR LIMIT=12] -->
     <string name="app_name">InventoryApp</string>
 
+    <!-- Name for the application [CHAR LIMIT=12] -->
+    <string name="content_description">Image missing</string>
+
     <!-- Label for overflow menu option that deletes all store data in the app [CHAR LIMIT=20] -->
     <string name="action_delete_all_entries">Delete All Items</string>
 
@@ -16,16 +19,35 @@
     <string name="empty_view_info">Get started by adding a product</string>
     <string name="empty_view_action">Add an item, click on the add \n floating button below.</string>
 
-    <!-- Label for editor activity's item [CHAR LIMIT=20] -->
-    <string name="product_item">Item</string>
-    <string name="product_name">Product</string>
-    <string name="product_price">Price</string>
-    <string name="product_quantity">Quantity</string>
-    <string name="supplier_name">Supplier</string>
-    <string name="supplier_phone">Phone</string>
-    <string name="supplier_email">Email</string>
+    <!-- Label for textView editor activity's item [CHAR LIMIT=20] -->
+    <string name="product_overview">Product overview</string>
+    <string name="supplier_overview">Supplier overview</string>
+    <string name="product_title">description:</string>
+    <string name="product_name">Product:</string>
+    <string name="product_price">Price: €</string>
+    <string name="product_quantity">Quantity:</string>
+    <string name="supplier_name">Supplier:</string>
+    <string name="supplier_phone">Phone:</string>
+    <string name="supplier_email">Email:</string>
+
+    <!-- Label for hint editText editor activity's item [CHAR LIMIT=20] -->
+    <string name="hint_name">name required</string>
+    <string name="hint_price">required</string>
+    <string name="hint_quantity">required</string>
+    <string name="hint_phone">phone required</string>
+    <string name="hint_email">mail required</string>
 
     <!-- Label for editor activity's item [CHAR LIMIT=20] -->
+    <string name="product_title_0">Computer</string>
+    <string name="product_title_1">Desktop</string>
+    <string name="product_title_2">Laptop</string>
+    <string name="product_title_3">Hardware</string>
+    <string name="product_title_4">Software</string>
+    <string name="product_title_5">Cell Phone</string>
+    <string name="product_title_6">SmartPhone</string>
 
+    <!-- Label for editor button [CHAR LIMIT=20] -->
+    <string name="button_add">add</string>
+    <string name="button_remove">del</string>
 
 </resources>

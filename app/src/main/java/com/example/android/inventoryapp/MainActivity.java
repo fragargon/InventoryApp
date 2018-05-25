@@ -44,6 +44,9 @@ public class MainActivity extends AppCompatActivity implements
 
         // Find the ListView which will be populated with the item's catalog.
         ListView listView = findViewById(R.id.list_view);
+        // Find and set empty view on the ListView, so that it only shows when the list has 0 items.
+        View emptyView = findViewById(R.id.empty_view);
+        listView.setEmptyView(emptyView);
         // Setup an Adapter to create a list item for each rows of catalog data.
         cursorAdapter = new StoreCursorAdapter(this, null);
         listView.setAdapter(cursorAdapter);

@@ -1,7 +1,7 @@
 <resources>
     <!-- Name for the application [CHAR LIMIT=12] -->
     <string name="app_name">InventoryApp</string>
-    <string name="table_header_view">The books table catalog contains %1$d books.\n\n</string>
+
     <!-- Label for overflow menu option that deletes all store data in the app [CHAR LIMIT=20] -->
     <string name="action_delete_all_entries">Delete All Items</string>
 
@@ -10,4 +10,22 @@
 
     <!-- Label for editor overflow menu option that deletes the current store [CHAR LIMIT=20] -->
     <string name="action_delete">Delete</string>
+
+    <!-- Label for the empty view when no data are available [CHAR LIMIT=50] -->
+    <string name="empty_inventory">Inventory is empty!</string>
+    <string name="empty_view_info">Get started by adding a product</string>
+    <string name="empty_view_action">Add an item, click on the add \n floating button below.</string>
+
+    <!-- Label for editor activity's item [CHAR LIMIT=20] -->
+    <string name="product_item">Item</string>
+    <string name="product_name">Product</string>
+    <string name="product_price">Price</string>
+    <string name="product_quantity">Quantity</string>
+    <string name="supplier_name">Supplier</string>
+    <string name="supplier_phone">Phone</string>
+    <string name="supplier_email">Email</string>
+
+    <!-- Label for editor activity's item [CHAR LIMIT=20] -->
+
+
 </resources>

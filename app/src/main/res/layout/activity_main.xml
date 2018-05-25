@@ -13,6 +13,37 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/value_16" />
 
+    <!-- Empty view is only visible when the list has no items. -->
+    <LinearLayout
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/text_card_view"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:text="@string/empty_inventory"/>
+
+        <ImageView
+            android:layout_width="@dimen/value_256"
+            android:layout_height="@dimen/value_256"
+            android:src="@drawable/empty_shop"/>
+
+        <TextView
+            style="@style/text_card_view"
+            android:text="@string/empty_view_info"/>
+
+        <TextView
+            style="@style/text_card_view"
+            android:text="@string/empty_view_action"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"

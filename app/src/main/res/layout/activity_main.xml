@@ -11,7 +11,7 @@
         android:id="@+id/list_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/value_16"/>
+        android:padding="@dimen/value_16" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

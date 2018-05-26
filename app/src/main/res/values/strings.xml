@@ -38,12 +38,13 @@
     <string name="hint_email">mail required</string>
 
     <!-- Label for editor activity's item [CHAR LIMIT=20] -->
-    <string name="product_title_0">Computer</string>
-    <string name="product_title_1">Desktop</string>
-    <string name="product_title_2">Laptop</string>
-    <string name="product_title_3">Hardware</string>
-    <string name="product_title_4">Software</string>
-    <string name="product_title_5">Cell Phone</string>
-    <string name="product_title_6">SmartPhone</string>
+    <string name="product_title_0">Informatics</string>
+    <string name="product_title_1">Computer</string>
+    <string name="product_title_2">Desktop</string>
+    <string name="product_title_3">Laptop</string>
+    <string name="product_title_4">Hardware</string>
+    <string name="product_title_5">Software</string>
+    <string name="product_title_6">Cell Phone</string>
+    <string name="product_title_7">SmartPhone</string>
 
 </resources>

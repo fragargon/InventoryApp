@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#3B4371</color>
     <color name="colorAccent">#7986cb</color>
     <color name="colorCardView">#a1887f</color>
+    <color name="colorSpinner">#bcaaa4</color>
 </resources>

@@ -9,5 +9,6 @@
         <item>@string/product_title_4</item>
         <item>@string/product_title_5</item>
         <item>@string/product_title_6</item>
+        <item>@string/product_title_7</item>
     </string-array>
 </resources>

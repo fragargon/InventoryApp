@@ -105,8 +105,8 @@ public class MainActivity extends AppCompatActivity implements
         // will be displayed after this query.
         String[] projection = {
                 StoreEntry.COLUMN_KEY,
-                StoreEntry.COLUMN_PRODUCT_NAME,
                 StoreEntry.COLUMN_PRODUCT_TITLE,
+                StoreEntry.COLUMN_PRODUCT_NAME,
                 StoreEntry.COLUMN_QUANTITY};
 
         // This Loader will execute the ContentProvider's query method on a background thread.

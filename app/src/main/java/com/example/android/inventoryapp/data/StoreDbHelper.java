@@ -36,7 +36,7 @@ public class StoreDbHelper extends SQLiteOpenHelper {
 
         final String SQL_CREATE_STORE_TABLE = "CREATE TABLE " + StoreEntry.TABLE_NAME + " (" +
                 StoreEntry.COLUMN_KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                StoreEntry.COLUMN_PRODUCT_TITLE + " TEXT NOT NULL, " +
+                StoreEntry.COLUMN_PRODUCT_TITLE + " INTEGER NOT NULL, " +
                 StoreEntry.COLUMN_PRODUCT_NAME + " TEXT NOT NULL, " +
                 StoreEntry.COLUMN_PRICE + " REAL NOT NULL, " +
                 StoreEntry.COLUMN_QUANTITY + " INTEGER NOT NULL DEFAULT 0, " +

@@ -53,24 +53,27 @@ public class StoreCursorAdapter extends CursorAdapter{
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         // Find fields to populate in inflated template.
-        TextView tvProductName = view.findViewById(R.id.list_product_name);
         TextView tvProductTitle = view.findViewById(R.id.list_product_title);
+        TextView tvProductName = view.findViewById(R.id.list_product_name);
         TextView tvProductQuantity = view.findViewById(R.id.list_product_quantity);
         ImageButton ibDecrement = view.findViewById(R.id.list_btn);
 
         // Extract properties from cursor.
-        int nameColumnIndex = cursor.getColumnIndex(StoreEntry.COLUMN_PRODUCT_NAME);
         int titleColumnIndex = cursor.getColumnIndex(StoreEntry.COLUMN_PRODUCT_TITLE);
+        int nameColumnIndex = cursor.getColumnIndex(StoreEntry.COLUMN_PRODUCT_NAME);
         int quantityColumnIndex = cursor.getColumnIndex(StoreEntry.COLUMN_QUANTITY);
 
         // Read the catalog attribute from the cursor for the current item.
+        int titleValue = cursor.getInt(titleColumnIndex);
         String name = cursor.getString(nameColumnIndex);
-        String title = cursor.getString(titleColumnIndex);
         int quantity = cursor.getInt(quantityColumnIndex);
+
+        // Get the product name for the titleValue
+        String[] title = context.getResources().getStringArray(R.array.product_type);
 
         // Populate fields with extracted properties.
         tvProductName.setText(name);
-        tvProductTitle.setText(title);
+        tvProductTitle.setText(title[titleValue]);
         tvProductQuantity.setText(quantity);
 
         // Set the listener to decrement the stock.

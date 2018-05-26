@@ -69,18 +69,18 @@ public final class StoreContract {
         public final static String COLUMN_KEY = BaseColumns._ID;
 
         /**
+         * title of the product in the store
+         *
+         * type: INTEGER
+         */
+        public final static String COLUMN_PRODUCT_TITLE = "title";
+
+        /**
          * product name item in the store
          *
          * type: TEXT
          */
         public final static String COLUMN_PRODUCT_NAME = "product";
-
-        /**
-         * title of the product in the store
-         *
-         * type: TEXT
-         */
-        public final static String COLUMN_PRODUCT_TITLE = "title";
 
         /**
          * price of the product in the store
@@ -116,5 +116,27 @@ public final class StoreContract {
          * type: TEXT
          */
         public final static String COLUMN_SUPPLIER_EMAIL = "email";
+
+        /**
+         * Possible value for the product title
+         */
+        public static final int PRODUCT_DEFAULT = 0;
+        public static final int PRODUCT_COMPUTER = 1;
+        public static final int PRODUCT_DESKTOP = 2;
+        public static final int PRODUCT_LAPTOP = 3;
+        public static final int PRODUCT_HARDWARE = 4;
+        public static final int PRODUCT_SOFTWARE = 5;
+        public static final int PRODUCT_CELLPHONE = 6;
+        public static final int PRODUCT_SMARTPHONE = 7;
+
+        /**
+         * This method returns the product type
+         */
+        public static boolean WhatproductType(int typeProduct) {
+            return typeProduct == PRODUCT_DEFAULT || typeProduct == PRODUCT_COMPUTER ||
+                    typeProduct == PRODUCT_DESKTOP || typeProduct == PRODUCT_LAPTOP ||
+                    typeProduct == PRODUCT_HARDWARE || typeProduct == PRODUCT_SOFTWARE ||
+                    typeProduct == PRODUCT_CELLPHONE || typeProduct == PRODUCT_SMARTPHONE;
+        }
     }
 }

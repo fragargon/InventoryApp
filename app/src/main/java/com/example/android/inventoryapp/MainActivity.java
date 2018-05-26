@@ -20,7 +20,7 @@ import com.example.android.inventoryapp.data.StoreContract.StoreEntry;
 public class MainActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
-    // Initialize the loader id.
+    // Identifier the loader id.
     private static final int STORE_LOADER = 0;
 
     // Initialize various class

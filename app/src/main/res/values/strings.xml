@@ -47,4 +47,10 @@
     <string name="product_title_6">Cell Phone</string>
     <string name="product_title_7">SmartPhone</string>
 
+    <!-- Label for the ProviderContent's messages IllegalArgumentException -->
+    <string name="unknown_content_query">Cannot query unknown URI: %1$s</string>
+    <string name="unknown_content_getType">Unknown Uri: %1$s with match: %2$d</string>
+    <string name="unknown_content_insert">Insertion is not supported for: %1$s</string>
+    <string name="unknown_content_insertion">Failed to insert row for: %1$s</string>
+
 </resources>

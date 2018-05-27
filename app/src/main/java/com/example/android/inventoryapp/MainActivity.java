@@ -107,7 +107,8 @@ public class MainActivity extends AppCompatActivity implements
                 StoreEntry.COLUMN_KEY,
                 StoreEntry.COLUMN_PRODUCT_TITLE,
                 StoreEntry.COLUMN_PRODUCT_NAME,
-                StoreEntry.COLUMN_QUANTITY};
+                StoreEntry.COLUMN_QUANTITY,
+                StoreEntry.COLUMN_PRICE};
 
         // This Loader will execute the ContentProvider's query method on a background thread.
         return new CursorLoader(this,   // parent activity context

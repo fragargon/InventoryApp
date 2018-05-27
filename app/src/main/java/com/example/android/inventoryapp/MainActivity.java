@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements
             }
         });
 
-        // Kick off the loader.
+        // Kick off the loader callback.
         getLoaderManager().initLoader(STORE_LOADER, null, this);
     }
 

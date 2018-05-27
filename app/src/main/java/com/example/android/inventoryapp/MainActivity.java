@@ -1,10 +1,12 @@
 package com.example.android.inventoryapp;
 
 import android.app.LoaderManager;
+import android.content.ContentUris;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -55,7 +57,14 @@ public class MainActivity extends AppCompatActivity implements
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // TODO
+                // Create new intent to go to {@link EditorActivity.class}
+                intent = new Intent(MainActivity.this, EditorActivity.class);
+                // Form the content URI that represents the selected product in the list.
+                Uri currentProductUri = ContentUris.withAppendedId(StoreEntry.CONTENT_URI, id);
+                // Set the URI on the data field of the intent.
+                intent.setData(currentProductUri);
+                // Launch the {@link EditorActivity} to display details of the selected product.
+                startActivity(intent);
             }
         });
 

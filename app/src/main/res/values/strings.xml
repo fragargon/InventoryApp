@@ -2,11 +2,15 @@
     <!-- Name for the application [CHAR LIMIT=12] -->
     <string name="app_name">InventoryApp</string>
 
-    <!-- Name for the application [CHAR LIMIT=12] -->
+    <!-- Label for the imageView [CHAR LIMIT=12] -->
     <string name="content_description">Image missing</string>
 
     <!-- Label for overflow menu option that deletes all store data in the app [CHAR LIMIT=20] -->
     <string name="action_delete_all_entries">Delete All Items</string>
+
+    <!-- Label for the editor in a edit mode or insert mode [CHAR LIMIT=20] -->
+    <string name="editor_edit_mode">Edit the catalog</string>
+    <string name="editor_insert_mode">Add in the catalog</string>
 
     <!-- Label for editor menu option to save store and leave editor [CHAR LIMIT=20] -->
     <string name="action_save">Save</string>

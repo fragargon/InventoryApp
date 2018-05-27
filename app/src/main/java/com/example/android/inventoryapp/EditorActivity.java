@@ -1,6 +1,7 @@
 package com.example.android.inventoryapp;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,9 +24,9 @@ public class EditorActivity extends AppCompatActivity{
     private static final int EXISTING_STORE_LOADER = 0;
 
     /** Content Uri for the existing store */
-    private Uri currentStoreUri;
+    private Uri currentProductUri;
 
-    /** Initialize various EditText field. */
+    /** Initialize various Views field. */
     private EditText productName;
     private EditText productPrice;
     private EditText productQuantity;
@@ -49,6 +50,18 @@ public class EditorActivity extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
+
+        // Get the intent that launch this activity
+        Intent intent = getIntent();
+        currentProductUri = intent.getData();
+
+        // Check the content URI, if it is null then means that
+        // creating a new product
+        if(currentProductUri == null) {
+            setTitle(getString(R.string.editor_insert_mode));
+        } else {
+            setTitle(getString(R.string.editor_edit_mode));
+        }
 
         initView();
 

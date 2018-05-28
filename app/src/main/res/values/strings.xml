@@ -57,5 +57,9 @@
     <string name="unknown_content_insert">Insertion is not supported for: %1$s</string>
     <string name="unknown_content_insertion">Failed to insert row for: %1$s</string>
     <string name="unknown_content_update">Update is not supported for: %1$s</string>
+    <string name="unknown_content_deletion">deletion is not supported for: %1$s</string>
+
+    <!-- Label for the LOG TAG messages in the activity -->
+    <string name="log_message_all_delete">: rows deleted from pet database</string>
 
 </resources>

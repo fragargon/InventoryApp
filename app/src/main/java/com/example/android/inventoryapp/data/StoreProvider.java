@@ -207,7 +207,35 @@ public class StoreProvider extends ContentProvider {
      */
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return 0;
+        // Gets the database in write mode.
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        // Track rows that were deleted.
+        int rowsDeleted;
+
+        // Get the URI
+        final int match = uriMatcher.match(uri);
+        switch (match) {
+            case CATALOG:
+                // Delete all rows that match the selection and selection args.
+                rowsDeleted = db.delete(StoreEntry.TABLE_NAME, selection, selectionArgs);
+                break;
+            case CATALOG_ID:
+                // Delete a single row given by the ID in the URI.
+                selection = StoreEntry.COLUMN_KEY + "=?";
+                selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
+                rowsDeleted = db.delete(StoreEntry.TABLE_NAME, selection, selectionArgs);
+                break;
+                default:
+                    throw new IllegalArgumentException(getContext().getString(R.string.unknown_content_deletion, uri));
+        }
+        // If 1 or more rows were deleted, then notify all listeners that the data at the
+        // given URI has changed
+        if(rowsDeleted != 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+        // Return the number of rows deleted
+        return rowsDeleted;
     }
 
     /**
@@ -231,6 +259,7 @@ public class StoreProvider extends ContentProvider {
             case CATALOG:
                 return updateProduct(uri, values, selection, selectionArgs);
             case CATALOG_ID:
+                // For the CATALOG_ID code, extract out the ID from the URI,
                 selection = StoreEntry.COLUMN_KEY + "=?";
                 selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
                 return updateProduct(uri, values, selection, selectionArgs);

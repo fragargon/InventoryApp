@@ -236,7 +236,8 @@ public class EditorActivity extends AppCompatActivity implements
                 finish();
                 return true;
             case R.id.action_detele:
-                // TODO
+                // deleted product
+                deletedProduct();
                 return true;
                 // Respond to a click on the UP button in the appBar.
             case android.R.id.home:
@@ -366,5 +367,18 @@ public class EditorActivity extends AppCompatActivity implements
         supplierEmail.setText("");
         supplierPhone.setText("");
 
+    }
+
+    /**
+     * Helper method to delete a single product rows from the database catalog.
+     */
+    private void deletedProduct() {
+        // Only perform the delete if this is an existing product.
+        if(currentProductUri != null) {
+            // Call the ContentResolver to delete the pet at the given content URI.
+            int rowsDeleted = getContentResolver().delete(currentProductUri, null, null);
+        }
+        // Close the activity
+        finish();
     }
 }

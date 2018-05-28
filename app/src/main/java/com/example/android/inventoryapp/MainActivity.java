@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +22,9 @@ import com.example.android.inventoryapp.data.StoreContract.StoreEntry;
 
 public class MainActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
+
+    // TAG for the log messages.
+    private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
     // Identifier the loader id.
     private static final int STORE_LOADER = 0;
@@ -95,7 +99,8 @@ public class MainActivity extends AppCompatActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_delete_all:
-                //TODO;
+                // Respond to a click on the "Delete all entries" menu option
+                deletedAllProduct();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -151,5 +156,10 @@ public class MainActivity extends AppCompatActivity implements
     public void onLoaderReset(Loader<Cursor> loader) {
         cursorAdapter.swapCursor(null);
 
+    }
+
+    private void deletedAllProduct() {
+        int rowsDeleted = getContentResolver().delete(StoreEntry.CONTENT_URI, null, null);
+        Log.v(LOG_TAG, rowsDeleted + getString(R.string.log_message_all_delete));
     }
 }

@@ -9,8 +9,8 @@
     <string name="action_delete_all_entries">Delete All Items</string>
 
     <!-- Label for the editor in a edit mode or insert mode [CHAR LIMIT=20] -->
-    <string name="editor_edit_mode">Edit the catalog</string>
-    <string name="editor_insert_mode">Add in the catalog</string>
+    <string name="editor_edit_mode">Edit a product</string>
+    <string name="editor_insert_mode">Add a product</string>
 
     <!-- Label for editor menu option to save store and leave editor [CHAR LIMIT=20] -->
     <string name="action_save">Save</string>
@@ -51,7 +51,7 @@
     <string name="product_title_6">Cell Phone</string>
     <string name="product_title_7">SmartPhone</string>
 
-    <!-- Label for the ProviderContent's messages IllegalArgumentException -->
+    <!-- Label for the ProviderContent's messages IllegalArgumentException [CHAR LIMIT=50] -->
     <string name="unknown_content_query">Cannot query unknown URI: %1$s</string>
     <string name="unknown_content_getType">Unknown Uri: %1$s with match: %2$d</string>
     <string name="unknown_content_insert">Insertion is not supported for: %1$s</string>
@@ -60,6 +60,12 @@
     <string name="unknown_content_deletion">deletion is not supported for: %1$s</string>
 
     <!-- Label for the LOG TAG messages in the activity -->
-    <string name="log_message_all_delete">: rows deleted from pet database</string>
+    <string name="log_message_all_delete"> rows (all) deleted from pet database</string>
+    <string name="log_message_row_delete"> row delete from the database</string>
+
+    <!-- Label for the dialog messages -->
+    <string name="alert_dialog_cancel">Cancel</string>
+    <string name="alert_dialog_delete">Delete</string>
+    <string name="alert_dialog_confirm_delete">Delete this product?</string>
 
 </resources>

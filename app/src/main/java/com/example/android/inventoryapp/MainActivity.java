@@ -1,8 +1,10 @@
 package com.example.android.inventoryapp;
 
+import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.ContentUris;
 import android.content.CursorLoader;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements
         // Find and set empty view on the ListView, so that it only shows when the list has 0 items.
         View emptyView = findViewById(R.id.empty_view);
         listView.setEmptyView(emptyView);
-        // Setup an Adapter to create a list item for each rows of catalog data.
+        // Setup an Adapter to create a list item for each rows of catalog database.
         cursorAdapter = new StoreCursorAdapter(this, null);
         listView.setAdapter(cursorAdapter);
 
@@ -84,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu options from the res/menu/menu_catalog.xml file.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -97,10 +100,11 @@ public class MainActivity extends AppCompatActivity implements
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // User clicked on a menu option in the app bar.
         switch (item.getItemId()) {
             case R.id.action_delete_all:
                 // Respond to a click on the "Delete all entries" menu option
-                deletedAllProduct();
+                showDialogDeleteConfirmation();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -156,6 +160,33 @@ public class MainActivity extends AppCompatActivity implements
     public void onLoaderReset(Loader<Cursor> loader) {
         cursorAdapter.swapCursor(null);
 
+    }
+
+    private void showDialogDeleteConfirmation() {
+        // Create an AlertDialog.Builder and set the message.
+        // Confirmation for the positive buttons on the dialog.
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.alert_dialog_confirm_delete);
+        builder.setPositiveButton(R.string.alert_dialog_delete, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // User clicked the "Delete" button, so delete the table catalog.
+                deletedAllProduct();
+            }
+        });
+        // Confirmation negative buttons on the dialog.
+        builder.setNegativeButton(R.string.alert_dialog_cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // User clicked the "Cancel" button, so dismiss the dialog
+                if(dialog != null) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        // Create and show the AlertDialog
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
     private void deletedAllProduct() {

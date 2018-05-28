@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +27,9 @@ import java.util.Locale;
 
 public class EditorActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks <Cursor> {
+
+    /** TAG for the log messages. */
+    private static final String LOG_TAG = EditorActivity.class.getSimpleName();
 
     /** Identifier the store loader id. */
     private static final int EXISTING_STORE_LOADER = 0;
@@ -377,6 +381,7 @@ public class EditorActivity extends AppCompatActivity implements
         if(currentProductUri != null) {
             // Call the ContentResolver to delete the pet at the given content URI.
             int rowsDeleted = getContentResolver().delete(currentProductUri, null, null);
+            Log.v(LOG_TAG, rowsDeleted + getString(R.string.log_message_row_delete));
         }
         // Close the activity
         finish();

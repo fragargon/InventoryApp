@@ -53,6 +53,8 @@ public class EditorActivity extends AppCompatActivity implements
      */
     private int selectedProduct = StoreEntry.PRODUCT_DEFAULT;
 
+    private boolean productHasChanged = false;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +68,7 @@ public class EditorActivity extends AppCompatActivity implements
         // creating a new product
         if(currentProductUri == null) {
             setTitle(getString(R.string.editor_insert_mode));
+
         } else {
             // Otherwise this is an existing product.
             setTitle(getString(R.string.editor_edit_mode));
@@ -161,6 +164,16 @@ public class EditorActivity extends AppCompatActivity implements
         String email = supplierEmail.getText().toString().trim();
         String phone = supplierPhone.getText().toString().trim();
 
+        // Check if this is supposed to be a new product
+        // and check if all the fields in the editor are blank
+        if(currentProductUri == null && TextUtils.isEmpty(nameProduct) &&
+                TextUtils.isEmpty(priceString) && TextUtils.isEmpty(quantityString) &&
+                TextUtils.isEmpty(nameSupplier) && TextUtils.isEmpty(email) &&
+                TextUtils.isEmpty(phone)) {
+            // Since no fields were modified, return early.
+            return;
+        }
+
         // parse priceString into an float dataType..
         float price = 0;
         if(!TextUtils.isEmpty(priceString)) {
@@ -183,8 +196,15 @@ public class EditorActivity extends AppCompatActivity implements
         values.put(StoreEntry.COLUMN_SUPPLIER_EMAIL, email);
         values.put(StoreEntry.COLUMN_SUPPLIER_PHONE, phone);
 
-        // Pass the URI in the database
-        Uri newUri = getContentResolver().insert(StoreEntry.CONTENT_URI, values);
+        // Determine if this is a new or existing pet by checking if mCurrentPetUri is null or not.
+        if(currentProductUri == null) {
+            // This is a NEW product, so insert a new product into the provider,
+            // Pass the URI in the database
+            Uri newUri = getContentResolver().insert(StoreEntry.CONTENT_URI, values);
+        } else {
+            // Otherwise this is an EXISTING pet, so update the pet with content URI: mCurrentPetUri.
+            int rowsUpdated = getContentResolver().update(currentProductUri, values, null, null);
+        }
     }
 
     /**

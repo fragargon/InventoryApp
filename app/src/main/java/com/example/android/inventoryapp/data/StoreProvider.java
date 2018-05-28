@@ -224,7 +224,33 @@ public class StoreProvider extends ContentProvider {
      * @return the number of rows affected.
      */
     @Override
-    public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return 0;
+    public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection,
+                      @Nullable String[] selectionArgs) {
+        final int match = uriMatcher.match(uri);
+        switch (match) {
+            case CATALOG:
+                return updateProduct(uri, values, selection, selectionArgs);
+            case CATALOG_ID:
+                selection = StoreEntry.COLUMN_KEY + "=?";
+                selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
+                return updateProduct(uri, values, selection, selectionArgs);
+                default:
+                    throw new IllegalArgumentException(getContext().getString(R.string.unknown_content_update, uri));
+        }
+    }
+
+    private int updateProduct(Uri uri, ContentValues contentValues, String selection, String[] selectionArgs) {
+        // Gets the database in write mode
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        // Perform the update on the database and get the number of rows affected.
+        int rowsUpdated = db.update(StoreEntry.TABLE_NAME, contentValues, selection, selectionArgs);
+        // If 1 or more rows were updated, then notify all listeners that the data at the
+        // given URI has changed.
+        if(rowsUpdated != 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+        // Return the number of rows updated
+        return rowsUpdated;
     }
 }

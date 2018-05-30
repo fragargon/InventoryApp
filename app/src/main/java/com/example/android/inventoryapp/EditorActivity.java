@@ -315,8 +315,8 @@ public class EditorActivity extends AppCompatActivity implements
                 finish();
                 return true;
             case R.id.action_detele:
-                // deleted product
-                deletedProduct();
+                // Pop up confirmation dialog for deletion
+                showDeleteConfirmationDialog();
                 return true;
                 // Respond to a click on the UP button in the appBar.
             case android.R.id.home:
@@ -475,9 +475,24 @@ public class EditorActivity extends AppCompatActivity implements
             super.onBackPressed();
             return;
         }
-        // TODO
+        // Otherwise if there are unsaved changes, setup a dialog to warn the user.
+        DialogInterface.OnClickListener discardButton =
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // User clicked "Discard" button, close the current activity.
+                        finish();
+                    }
+                };
+        // Show dialog that there are unsaved changes.
+        showUnsavedDialog(discardButton);
     }
 
+    /**
+     * Method to build an alertDialog interface to handle up button action and behaviour
+     * that the user has changed or not the edit mode in the activity.
+     * @param discardButton is the action if user select the positive button.
+     */
     private void showUnsavedDialog(DialogInterface.OnClickListener discardButton) {
         // Create an AlertDialog.Builder and set the message, and click listeners
         // for the positive and negative buttons on the dialog.
@@ -495,6 +510,32 @@ public class EditorActivity extends AppCompatActivity implements
             }
         });
         // Create and show the alertDialog
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    private void showDeleteConfirmationDialog() {
+        // Create an AlertDialog.Builder and set the message, and click listeners
+        // for the positive and negative buttons on the dialog.
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(getString(R.string.alert_dialog_confirm_delete_product));
+        builder.setPositiveButton(getString(R.string.alert_dialog_delete), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // User clicked the delete button.
+                deletedProduct();
+            }
+        });
+        builder.setNegativeButton(getString(R.string.alert_dialog_cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // user clicked the cancel button.
+                if(dialog != null) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        // Create and show alertDialog
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }

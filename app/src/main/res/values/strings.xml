@@ -81,4 +81,9 @@
     <string name="delete_successful">Product deleted</string>
     <string name="delete_error">Error deleting product</string>
 
+    <!-- Label for the sold button in the listView -->
+    <string name="product_sold">Product sold</string>
+    <string name="product_sold_error">Error while proceeding</string>
+    <string name="product_sold_stock_zero">Not enough product in stock</string>
+
 </resources>

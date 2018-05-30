@@ -72,11 +72,13 @@
     <string name="alert_dialog_keep_editing">Keep On</string>
     <string name="alert_dialog_discard">Discard</string>
 
-    <!-- Label for action on the editorActivity if insertion/update in database
+    <!-- Label for action on the editorActivity if insertion/update/delete in database
     is successful or not [CHAR LIMIT=50] -->
     <string name="insertion_successful">Product saved</string>
     <string name="insertion_failed">Error saving product</string>
     <string name="update_successful">Product updated</string>
     <string name="update_failed">Error updating product</string>
+    <string name="delete_successful">Product deleted</string>
+    <string name="delete_error">Error deleting product</string>
 
 </resources>

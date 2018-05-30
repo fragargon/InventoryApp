@@ -99,10 +99,13 @@ public class EditorActivity extends AppCompatActivity implements
             getLoaderManager().initLoader(EXISTING_STORE_LOADER, null, this);
         }
 
+        /* See method {@link initView()} */
         initView();
 
+        /* See method {@link hasBeenTouched()} */
         hasBeenTouched();
 
+        /* See method {@link setupSpinner()} */
         setupSpinner();
 
     }
@@ -549,6 +552,15 @@ public class EditorActivity extends AppCompatActivity implements
             // Call the ContentResolver to delete the pet at the given content URI.
             int rowsDeleted = getContentResolver().delete(currentProductUri, null, null);
             Log.v(LOG_TAG, rowsDeleted + getString(R.string.log_message_row_delete));
+
+            // Show a toast message if deleting is successful or not.
+            if(rowsDeleted == 0) {
+                Toast.makeText(this, getString(R.string.delete_error),
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, getString(R.string.delete_successful),
+                        Toast.LENGTH_SHORT).show();
+            }
         }
         // Close the activity
         finish();

@@ -68,4 +68,10 @@
     <string name="alert_dialog_delete">Delete</string>
     <string name="alert_dialog_confirm_delete">Delete this product?</string>
 
+    <!-- Label for action on the editorActivity if insertion/update in database is successful or not [CHAR LIMIT=50] -->
+    <string name="insertion_successful">Product saved</string>
+    <string name="insertion_failed">Error saving product</string>
+    <string name="update_successful">Product updated</string>
+    <string name="update_failed">Error updating product</string>
+
 </resources>

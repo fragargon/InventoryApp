@@ -176,6 +176,8 @@ public class StoreProvider extends ContentProvider {
      */
     private Uri insertProduct(Uri uri, ContentValues contentValues) {
 
+        // Check that the product name is not empty
+
         // Gets the database in write mode
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 

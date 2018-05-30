@@ -14,12 +14,14 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.android.inventoryapp.data.StoreContract.StoreEntry;
 
@@ -57,7 +59,20 @@ public class EditorActivity extends AppCompatActivity implements
      */
     private int selectedProduct = StoreEntry.PRODUCT_DEFAULT;
 
+    /** Boolean flag that keeps track of whether the product has been edited (true) or not (false) */
     private boolean productHasChanged = false;
+
+    /**
+     * OnTouchListener that listens for any user touches on a View, implying that they are modifying
+     * the view, and we change the productHasChanged boolean to true.
+     */
+    private View.OnTouchListener onTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            productHasChanged = true;
+            return false;
+        }
+    };
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -82,6 +97,8 @@ public class EditorActivity extends AppCompatActivity implements
         }
 
         initView();
+
+        hasBeenTouched();
 
         setupSpinner();
 
@@ -109,6 +126,19 @@ public class EditorActivity extends AppCompatActivity implements
         // Find the dropdown spinner
         productSpinner = findViewById(R.id.product_spinner);
 
+    }
+
+    /**
+     * Method to setup an onTouchListener on all the variable contents.
+     * Now we can define if the user has touched or modified the views.
+     */
+    private void hasBeenTouched() {
+        productName.setOnTouchListener(onTouchListener);
+        productPrice.setOnTouchListener(onTouchListener);
+        productQuantity.setOnTouchListener(onTouchListener);
+        supplierName.setOnTouchListener(onTouchListener);
+        supplierEmail.setOnTouchListener(onTouchListener);
+        supplierPhone.setOnTouchListener(onTouchListener);
     }
 
     /**
@@ -202,12 +232,35 @@ public class EditorActivity extends AppCompatActivity implements
 
         // Determine if this is a new or existing pet by checking if mCurrentPetUri is null or not.
         if(currentProductUri == null) {
-            // This is a NEW product, so insert a new product into the provider,
+            // This is a new product, so insert a new product into the provider,
             // Pass the URI in the database
             Uri newUri = getContentResolver().insert(StoreEntry.CONTENT_URI, values);
+
+            // Show a text message if the insertion is successful or not.
+            if(newUri == null) {
+                // if the rowId is -1, insertion failed.
+                Toast.makeText(this, getString(R.string.insertion_failed),
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                // insertion is successful.
+                Toast.makeText(this, getString(R.string.insertion_successful),
+                        Toast.LENGTH_SHORT).show();
+            }
+
         } else {
-            // Otherwise this is an EXISTING pet, so update the pet with content URI: mCurrentPetUri.
+            // Otherwise this is an EXISTING pet, so update the pet with content URI: currentProductUri.
             int rowsUpdated = getContentResolver().update(currentProductUri, values, null, null);
+
+            // Show a text message if the update is successful or not.
+            if(rowsUpdated == 0) {
+                // if no row is affected.
+                Toast.makeText(this, getString(R.string.update_failed),
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                // update row is successful.
+                Toast.makeText(this, getString(R.string.update_successful),
+                        Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -220,6 +273,25 @@ public class EditorActivity extends AppCompatActivity implements
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_editor, menu);
+        return true;
+    }
+
+    /**
+     * Prepare the Screen's standard options menu to be displayed.
+     *
+     * @param menu The options menu as last shown or first initialized by
+     *             onCreateOptionsMenu().
+     * @return You must return true for the menu to be displayed;
+     * if you return false it will not be shown.
+     */
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        // If this is a new product, hide the "Delete" menu item.
+        if(currentProductUri == null) {
+            MenuItem menuItem = menu.findItem(R.id.action_detele);
+            menuItem.setVisible(false);
+        }
         return true;
     }
 

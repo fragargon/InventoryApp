@@ -101,21 +101,28 @@ public class StoreCursorAdapter extends CursorAdapter{
         ibSoldItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // check the available quantity in stock.
                 if(quantity > 0) {
                     int newQuantity = quantity - 1;
+                    // Get the uri to update the stock.
                     Uri quantityUri = ContentUris.withAppendedId(StoreEntry.CONTENT_URI, productId);
+
                     ContentValues values = new ContentValues();
+                    // Update the new value for quantity row.
                     values.put(StoreEntry.COLUMN_QUANTITY, newQuantity);
                     int rowUpdated = context.getContentResolver().update(quantityUri,
                             values, null, null);
                     if(!(rowUpdated > 0)) {
+                        // If row is not greater than 0 then something went wrong.
                         Toast.makeText(context, context.getString(R.string.product_sold_error),
                                 Toast.LENGTH_SHORT).show();
                     } else {
+                        // Row is greater than 0, product successfully sold
                         Toast.makeText(context, context.getString(R.string.product_sold),
                                 Toast.LENGTH_SHORT).show();
                     }
                 } else {
+                    // Stock is equal to 0, no more product available.
                     Toast.makeText(context, context.getString(R.string.product_sold_stock_zero),
                             Toast.LENGTH_SHORT).show();
                 }

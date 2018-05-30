@@ -22,8 +22,6 @@ import java.text.NumberFormat;
 
 public class StoreCursorAdapter extends CursorAdapter{
 
-    private static final String LOG_TAG = StoreCursorAdapter.class.getSimpleName();
-
     /**
      * Constructor that always enables auto-requery.
      *

@@ -1,14 +1,17 @@
 package com.example.android.inventoryapp;
 
+import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.ContentValues;
 import android.content.CursorLoader;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -162,21 +165,21 @@ public class EditorActivity extends AppCompatActivity implements
                 String selection = (String) parent.getItemAtPosition(position);
                 if(!TextUtils.isEmpty(selection)) {
                     switch (position) {
-                        case 1: selectedProduct = StoreEntry.PRODUCT_COMPUTER;
+                        case 1: selectedProduct = StoreEntry.PRODUCT_COMPUTER; // Computer
                         break;
-                        case 2: selectedProduct = StoreEntry.PRODUCT_DESKTOP;
+                        case 2: selectedProduct = StoreEntry.PRODUCT_DESKTOP; // Desktop
                         break;
-                        case 3: selectedProduct = StoreEntry.PRODUCT_LAPTOP;
+                        case 3: selectedProduct = StoreEntry.PRODUCT_LAPTOP; // Laptop
                         break;
-                        case 4: selectedProduct = StoreEntry.PRODUCT_HARDWARE;
+                        case 4: selectedProduct = StoreEntry.PRODUCT_HARDWARE; // Hardware
                         break;
-                        case 5: selectedProduct = StoreEntry.PRODUCT_SOFTWARE;
+                        case 5: selectedProduct = StoreEntry.PRODUCT_SOFTWARE; // Software
                         break;
-                        case 6: selectedProduct = StoreEntry.PRODUCT_CELLPHONE;
+                        case 6: selectedProduct = StoreEntry.PRODUCT_CELLPHONE; // Cellphone
                         break;
-                        case 7: selectedProduct = StoreEntry.PRODUCT_SMARTPHONE;
+                        case 7: selectedProduct = StoreEntry.PRODUCT_SMARTPHONE; // Smartphone
                         break;
-                        default: selectedProduct = StoreEntry.PRODUCT_DEFAULT;
+                        default: selectedProduct = StoreEntry.PRODUCT_DEFAULT; // Informatics
                     }
                 }
             }
@@ -317,7 +320,23 @@ public class EditorActivity extends AppCompatActivity implements
                 return true;
                 // Respond to a click on the UP button in the appBar.
             case android.R.id.home:
-                // TODO
+                /// If the product hasn't changed, continue with navigating up to parent activity
+                // which is the {@link MainActivity}.
+                if(!productHasChanged) {
+                    NavUtils.navigateUpFromSameTask(this);
+                    return true;
+                }
+                // Otherwise if there are unsaved changes, setup a dialog to warn the user.
+                DialogInterface.OnClickListener discardButtonListener =
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // User clicked "Discard" button, navigate to parent activity.
+                                NavUtils.navigateUpFromSameTask(EditorActivity.this);
+                            }
+                        };
+                // Show a dialog that notifies the user has unsaved changes.
+                showUnsavedDialog(discardButtonListener);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -443,6 +462,41 @@ public class EditorActivity extends AppCompatActivity implements
         supplierEmail.setText("");
         supplierPhone.setText("");
 
+    }
+
+    /**
+     * Take care of popping the fragment back stack or finishing the activity
+     * as appropriate.
+     */
+    @Override
+    public void onBackPressed() {
+        // If the pet hasn't changed, continue with handling back button press
+        if(!productHasChanged) {
+            super.onBackPressed();
+            return;
+        }
+        // TODO
+    }
+
+    private void showUnsavedDialog(DialogInterface.OnClickListener discardButton) {
+        // Create an AlertDialog.Builder and set the message, and click listeners
+        // for the positive and negative buttons on the dialog.
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(getString(R.string.alert_dialog_unsaved_message));
+        builder.setPositiveButton(getString(R.string.alert_dialog_discard), discardButton);
+        builder.setNegativeButton(getString(R.string.alert_dialog_keep_editing), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // User clicked the "Keep editing" button, so dismiss the dialog
+                // and continue editing the pet.
+                if(dialog != null) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        // Create and show the alertDialog
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
     /**

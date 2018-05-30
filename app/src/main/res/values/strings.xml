@@ -2,7 +2,7 @@
     <!-- Name for the application [CHAR LIMIT=12] -->
     <string name="app_name">InventoryApp</string>
 
-    <!-- Label for the imageView [CHAR LIMIT=12] -->
+    <!-- Label for the emptyImageView [CHAR LIMIT=12] -->
     <string name="content_description">Image missing</string>
 
     <!-- Label for overflow menu option that deletes all store data in the app [CHAR LIMIT=20] -->
@@ -63,12 +63,17 @@
     <string name="log_message_all_delete"> rows (all) deleted from pet database</string>
     <string name="log_message_row_delete"> row delete from the database</string>
 
-    <!-- Label for the dialog messages -->
+    <!-- Label for dialog messages [CHAR LIMIT=50] -->
     <string name="alert_dialog_cancel">Cancel</string>
     <string name="alert_dialog_delete">Delete</string>
-    <string name="alert_dialog_confirm_delete">Delete this product?</string>
+    <string name="alert_dialog_confirm_delete_all">Delete all the products?</string>
+    <string name="alert_dialog_confirm_delete_product">Delete the product?</string>
+    <string name="alert_dialog_unsaved_message">Discard the changes and quit editing.</string>
+    <string name="alert_dialog_keep_editing">Keep On</string>
+    <string name="alert_dialog_discard">Discard</string>
 
-    <!-- Label for action on the editorActivity if insertion/update in database is successful or not [CHAR LIMIT=50] -->
+    <!-- Label for action on the editorActivity if insertion/update in database
+    is successful or not [CHAR LIMIT=50] -->
     <string name="insertion_successful">Product saved</string>
     <string name="insertion_failed">Error saving product</string>
     <string name="update_successful">Product updated</string>

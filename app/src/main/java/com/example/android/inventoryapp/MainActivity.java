@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements
         // Create an AlertDialog.Builder and set the message.
         // Confirmation for the positive buttons on the dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(R.string.alert_dialog_confirm_delete);
+        builder.setMessage(R.string.alert_dialog_confirm_delete_all);
         builder.setPositiveButton(R.string.alert_dialog_delete, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

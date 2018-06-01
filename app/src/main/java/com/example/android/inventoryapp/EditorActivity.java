@@ -55,6 +55,14 @@ public class EditorActivity extends AppCompatActivity implements
     private ImageButton btnCallPhone;
     private Spinner productSpinner;
 
+    /**  Initialize various variable*/
+    String nameProduct;
+    String priceString;
+    String quantityString;
+    String nameSupplier;
+    String email;
+    String phone;
+
     /**
      * Type of product selected, the possible value are:
      * 0 for informatics (default), 1 for computer, 2 for desktop, 3 for laptop
@@ -258,12 +266,12 @@ public class EditorActivity extends AppCompatActivity implements
     private void saveProduct() {
         // Read from the inputFields.
         /* Initialize various variable*/
-        String nameProduct = productName.getText().toString().trim();
-        String priceString = productPrice.getText().toString().trim();
-        String quantityString = productQuantity.getText().toString().trim();
-        String nameSupplier = supplierName.getText().toString().trim();
-        String email = supplierEmail.getText().toString().trim();
-        String phone = supplierPhone.getText().toString().trim();
+        nameProduct = productName.getText().toString().trim();
+        priceString = productPrice.getText().toString().trim();
+        quantityString = productQuantity.getText().toString().trim();
+        nameSupplier = supplierName.getText().toString().trim();
+        email = supplierEmail.getText().toString().trim();
+        phone = supplierPhone.getText().toString().trim();
 
         // Check if this is supposed to be a new product
         // and check if all the fields in the editor are blank
@@ -275,27 +283,77 @@ public class EditorActivity extends AppCompatActivity implements
             return;
         }
 
-        // parse priceString into an float dataType..
-        float price = 0;
-        if(!TextUtils.isEmpty(priceString)) {
-            price = Float.parseFloat(priceString);
-        }
-
-        // parse quantityString into an int dataType..
-        int quantity = 0;
-        if(!TextUtils.isEmpty(quantityString)) {
-            quantity = Integer.parseInt(quantityString);
-        }
-
         // Create a ContentValue object where columns name are the key.
         ContentValues values = new ContentValues();
+
+        // set the spinner product title id.
         values.put(StoreEntry.COLUMN_PRODUCT_TITLE, selectedProduct);
-        values.put(StoreEntry.COLUMN_PRODUCT_NAME, nameProduct);
-        values.put(StoreEntry.COLUMN_PRICE, price);
-        values.put(StoreEntry.COLUMN_QUANTITY, quantity);
-        values.put(StoreEntry.COLUMN_SUPPLIER_NAME, nameSupplier);
-        values.put(StoreEntry.COLUMN_SUPPLIER_EMAIL, email);
-        values.put(StoreEntry.COLUMN_SUPPLIER_PHONE, phone);
+
+        // Check if the fields product name is fulfill by the user.
+        if(!TextUtils.isEmpty(nameProduct)) {
+            values.put(StoreEntry.COLUMN_PRODUCT_NAME, nameProduct);
+        } else {
+            // if blank display an error.
+            productName.requestFocus();
+            productName.setError(getString(R.string.error_empty_product_name));
+            return;
+        }
+
+        // Check if the fields product price is fulfill by the user.
+        // parse priceString into an float dataType..
+        float price;
+        if(!TextUtils.isEmpty(priceString)) {
+            price = Float.parseFloat(priceString);
+            values.put(StoreEntry.COLUMN_PRICE, price);
+        } else {
+            // if blank display an error.
+            productPrice.requestFocus();
+            productPrice.setError(getString(R.string.error_empty_product_price));
+            return;
+        }
+
+        // Check if the fields product quantity is fulfill by the user.
+        // parse quantityString into an int dataType..
+        int quantity;
+        if(!TextUtils.isEmpty(quantityString)) {
+            quantity = Integer.parseInt(quantityString);
+            values.put(StoreEntry.COLUMN_QUANTITY, quantity);
+        } else {
+            // if blank display an error.
+            productQuantity.requestFocus();
+            productQuantity.setError(getString(R.string.error_empty_product_quantity));
+            return;
+        }
+
+        // Check if the fields supplier name is fulfill by the user.
+        if(!TextUtils.isEmpty(nameSupplier)) {
+            values.put(StoreEntry.COLUMN_SUPPLIER_NAME, nameSupplier);
+        } else {
+            // if blank display an error.
+            supplierName.requestFocus();
+            supplierName.setError(getString(R.string.error_empty_supplier_name));
+            return;
+        }
+
+        // Check if the fields supplier email is fulfill by the user.
+        if(!TextUtils.isEmpty(email)) {
+            values.put(StoreEntry.COLUMN_SUPPLIER_EMAIL, email);
+        } else {
+            // if blank display an error.
+            supplierEmail.requestFocus();
+            supplierEmail.setError(getString(R.string.error_empty_supplier_email));
+            return;
+        }
+
+        // Check if the fields supplier email is fulfill by the user.
+        if(!TextUtils.isEmpty(phone)) {
+            values.put(StoreEntry.COLUMN_SUPPLIER_PHONE, phone);
+        } else {
+            // if blank display an error.
+            supplierPhone.requestFocus();
+            supplierPhone.setError(getString(R.string.error_empty_supplier_phone));
+            return;
+        }
 
         // Determine if this is a new or existing pet by checking if mCurrentPetUri is null or not.
         if(currentProductUri == null) {
@@ -328,6 +386,31 @@ public class EditorActivity extends AppCompatActivity implements
                 Toast.makeText(this, getString(R.string.update_successful),
                         Toast.LENGTH_SHORT).show();
             }
+
+            // Exit Activity
+            finish();
+        }
+    }
+
+    /**
+     * Helper method to check that all fields are fulfill
+     */
+    private void checkAllField() {
+        // Check if this is supposed to be a new product
+        // and check if all the fields in the editor are fulfill
+        if(currentProductUri == null &&
+                TextUtils.isEmpty(nameProduct) ||
+                TextUtils.isEmpty(priceString) ||
+                TextUtils.isEmpty(quantityString) ||
+                TextUtils.isEmpty(nameSupplier) ||
+                TextUtils.isEmpty(email) ||
+                TextUtils.isEmpty(phone)) {
+            // Since no fields were modified, popup a message..
+            Toast.makeText(this, getString(R.string.error_fulfill_all_the_field)
+                    , Toast.LENGTH_SHORT).show();;
+        } else {
+            //exit the activity
+            finish();
         }
     }
 
@@ -375,8 +458,7 @@ public class EditorActivity extends AppCompatActivity implements
             case R.id.action_save:
                 // Save pet into database
                 saveProduct();
-                // Exit Activity
-                finish();
+                checkAllField();
                 return true;
             case R.id.action_detele:
                 // Pop up confirmation dialog for deletion

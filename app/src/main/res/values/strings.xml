@@ -98,4 +98,7 @@
     <!-- Label to handle the email messages [CHAR LIMIT=50] -->
     <string name="header_message">Dear Sr %1$s</string>
 
+    <!-- Label for a toast message that warn the user to fulfill all the field -->
+    <string name="error_fulfill_all_the_field">You need to fulfill all the field or quit</string>
+
 </resources>

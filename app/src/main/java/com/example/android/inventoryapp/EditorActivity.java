@@ -1,5 +1,6 @@
 package com.example.android.inventoryapp;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.ContentValues;
@@ -15,6 +16,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -78,6 +80,7 @@ public class EditorActivity extends AppCompatActivity implements
      * the view, and we change the productHasChanged boolean to true.
      */
     private View.OnTouchListener onTouchListener = new View.OnTouchListener() {
+        @SuppressLint("ClickableViewAccessibility")
         @Override
         public boolean onTouch(View v, MotionEvent event) {
             productHasChanged = true;
@@ -204,6 +207,7 @@ public class EditorActivity extends AppCompatActivity implements
      * Method to setup an onTouchListener on all the variable contents.
      * Now we can define if the user has touched or modified the views.
      */
+    @SuppressLint("ClickableViewAccessibility")
     private void hasBeenTouched() {
         productName.setOnTouchListener(onTouchListener);
         productPrice.setOnTouchListener(onTouchListener);
@@ -336,7 +340,7 @@ public class EditorActivity extends AppCompatActivity implements
         }
 
         // Check if the fields supplier email is fulfill by the user.
-        if(!TextUtils.isEmpty(email)) {
+        if(!TextUtils.isEmpty(email) || (Patterns.EMAIL_ADDRESS.matcher(email).matches())) {
             values.put(StoreEntry.COLUMN_SUPPLIER_EMAIL, email);
         } else {
             // if blank display an error.
@@ -407,7 +411,7 @@ public class EditorActivity extends AppCompatActivity implements
                 TextUtils.isEmpty(phone)) {
             // Since no fields were modified, popup a message..
             Toast.makeText(this, getString(R.string.error_fulfill_all_the_field)
-                    , Toast.LENGTH_SHORT).show();;
+                    , Toast.LENGTH_SHORT).show();
         } else {
             //exit the activity
             finish();

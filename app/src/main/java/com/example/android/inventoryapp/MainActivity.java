@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements
     StoreCursorAdapter cursorAdapter;
     Intent intent;
 
+    @SuppressWarnings("deprecation")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

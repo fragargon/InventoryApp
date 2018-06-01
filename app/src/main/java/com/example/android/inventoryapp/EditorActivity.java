@@ -108,8 +108,8 @@ public class EditorActivity extends AppCompatActivity implements
         /* See method {@link setupSpinner()} */
         setupSpinner();
 
-        /**
-         * OnclickListener on the button to increase the product quantity.
+        /*
+          OnclickListener on the button to increase the product quantity.
          */
         btnAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,8 +125,8 @@ public class EditorActivity extends AppCompatActivity implements
             }
         });
 
-        /**
-         * OnclickListener on the button to decrease the product quantity.
+        /*
+          OnclickListener on the button to decrease the product quantity.
          */
         btnDelItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,23 +143,26 @@ public class EditorActivity extends AppCompatActivity implements
             }
         });
 
-        /**
-         * OnclickListener on the button to send an order to the supplier.
+        /*
+          OnclickListener on the button to send an order to the supplier.
          */
         btnSendMail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO method to send a mail
+                String address = supplierEmail.getText().toString();
+                String name = supplierName.getText().toString();
+                String subject = getString(R.string.header_message, name);
+                composeEmail(address, subject);
             }
         });
 
-        /**
-         * OnclickListener on the button to send an order to the supplier.
+        /*
+          OnclickListener on the button to dial supplier's phone number.
          */
         btnCallPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO method to call the supplier
+                dialPhoneNumber(supplierPhone.getText().toString());
             }
         });
 
@@ -622,5 +625,28 @@ public class EditorActivity extends AppCompatActivity implements
         }
         // Close the activity
         finish();
+    }
+
+    /**
+     * helper method handle a dialer intent whic be trigger
+     * with a click listener button.
+     * @param phoneNumber is the supplier's phone number
+     */
+    public void dialPhoneNumber(String phoneNumber) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:" + phoneNumber));
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
+    public void composeEmail(String addresses, String subject) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        intent.putExtra(Intent.EXTRA_EMAIL, addresses);
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 }

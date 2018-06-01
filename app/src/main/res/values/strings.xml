@@ -86,7 +86,7 @@
     <string name="product_sold_error">Error while proceeding</string>
     <string name="product_sold_stock_zero">Not enough product in stock</string>
 
-    <!-- Label to handle error check input edit text -->
+    <!-- Label to handle error check input edit text [CHAR LIMIT=20] -->
     <string name="error_empty_product_name">Product Name is required</string>
     <string name="error_empty_product_price">Product Price is required</string>
     <string name="error_empty_product_quantity">Product Quantity is required</string>
@@ -94,5 +94,8 @@
     <string name="error_empty_supplier_name">Supplier Name is required</string>
     <string name="error_empty_supplier_email">Supplier Email is required</string>
     <string name="error_empty_supplier_phone">Supplier Phone is required</string>
+
+    <!-- Label to handle the email messages [CHAR LIMIT=50] -->
+    <string name="header_message">Dear Sr %1$s</string>
 
 </resources>

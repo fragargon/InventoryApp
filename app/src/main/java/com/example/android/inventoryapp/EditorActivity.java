@@ -108,6 +108,61 @@ public class EditorActivity extends AppCompatActivity implements
         /* See method {@link setupSpinner()} */
         setupSpinner();
 
+        /**
+         * OnclickListener on the button to increase the product quantity.
+         */
+        btnAddItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String stock = productQuantity.getText().toString().trim();
+                if(!TextUtils.isEmpty(stock)) {
+                    int addStock = Integer.parseInt(stock);
+                    productQuantity.setText(String.valueOf(addStock + 1));
+                } else {
+                    Toast.makeText(EditorActivity.this, getString(R.string.error_empty_product_price),
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        /**
+         * OnclickListener on the button to decrease the product quantity.
+         */
+        btnDelItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String stock = productQuantity.getText().toString().trim();
+                int delStock = Integer.parseInt(stock);
+                if(delStock >= 1) {
+                    productQuantity.setText(String.valueOf(delStock - 1));
+                } else {
+                    Toast.makeText(EditorActivity.this, getString(R.string.error_empty_product_quantity_zero),
+                            Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+        /**
+         * OnclickListener on the button to send an order to the supplier.
+         */
+        btnSendMail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO method to send a mail
+            }
+        });
+
+        /**
+         * OnclickListener on the button to send an order to the supplier.
+         */
+        btnCallPhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO method to call the supplier
+            }
+        });
+
     }
 
     /**
@@ -145,6 +200,8 @@ public class EditorActivity extends AppCompatActivity implements
         supplierName.setOnTouchListener(onTouchListener);
         supplierEmail.setOnTouchListener(onTouchListener);
         supplierPhone.setOnTouchListener(onTouchListener);
+        btnAddItem.setOnTouchListener(onTouchListener);
+        btnDelItem.setOnTouchListener(onTouchListener);
     }
 
     /**
@@ -197,6 +254,7 @@ public class EditorActivity extends AppCompatActivity implements
 
     private void saveProduct() {
         // Read from the inputFields.
+        /* Initialize various variable*/
         String nameProduct = productName.getText().toString().trim();
         String priceString = productPrice.getText().toString().trim();
         String quantityString = productQuantity.getText().toString().trim();
@@ -254,7 +312,7 @@ public class EditorActivity extends AppCompatActivity implements
             }
 
         } else {
-            // Otherwise this is an EXISTING pet, so update the pet with content URI: currentProductUri.
+            // Otherwise this is an EXISTING product, so update the pet with content URI: currentProductUri.
             int rowsUpdated = getContentResolver().update(currentProductUri, values, null, null);
 
             // Show a text message if the update is successful or not.
@@ -409,7 +467,7 @@ public class EditorActivity extends AppCompatActivity implements
 
             // Update the views on the screen with the values from the database.
             productName.setText(name);
-            productPrice.setText(String.format(Float.toString(price), Locale.getDefault()));
+            productPrice.setText(String.format("%.2f", price));
             productQuantity.setText(String.format(Integer.toString(quantity), Locale.getDefault()));
             supplierName.setText(supplier);
             supplierEmail.setText(email);

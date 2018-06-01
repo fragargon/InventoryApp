@@ -180,7 +180,7 @@ public class EditorActivity extends AppCompatActivity implements
     }
 
     /**
-     * Method to cast the views to display the variable's content.
+     * Helper Method to cast the views to display the variable's content.
      */
     private void initView() {
 
@@ -204,7 +204,7 @@ public class EditorActivity extends AppCompatActivity implements
     }
 
     /**
-     * Method to setup an onTouchListener on all the variable contents.
+     * Helper Method to setup an onTouchListener on all the variable contents.
      * Now we can define if the user has touched or modified the views.
      */
     @SuppressLint("ClickableViewAccessibility")
@@ -220,7 +220,7 @@ public class EditorActivity extends AppCompatActivity implements
     }
 
     /**
-     * Create a spinner dropdown object.
+     * Helper method create a spinner dropdown object.
      */
     private void setupSpinner() {
         // Create an adapter for spinner - use the default layout.
@@ -267,6 +267,12 @@ public class EditorActivity extends AppCompatActivity implements
         });
     }
 
+    /**
+     * Helper method to get editor inputs, valid them and save them in the database.
+     * If currentProductUri is null means this is a new entry in the database catalog.
+     * Otherwise it updates the rows in the product table.
+     *
+     */
     private void saveProduct() {
         // Read from the inputFields.
         /* Initialize various variable*/
@@ -664,6 +670,10 @@ public class EditorActivity extends AppCompatActivity implements
         alertDialog.show();
     }
 
+    /**
+     * Helper method build an alert dialog to confirm
+     * delete or cancel action on the product.
+     */
     private void showDeleteConfirmationDialog() {
         // Create an AlertDialog.Builder and set the message, and click listeners
         // for the positive and negative buttons on the dialog.
@@ -714,7 +724,7 @@ public class EditorActivity extends AppCompatActivity implements
     }
 
     /**
-     * helper method handle a dialer intent whic be trigger
+     * helper method handle a dialer intent which be trigger
      * with a click listener button.
      * @param phoneNumber is the supplier's phone number
      */
@@ -726,6 +736,12 @@ public class EditorActivity extends AppCompatActivity implements
         }
     }
 
+    /**
+     * Helper method handle a compose email intent which be trigger
+     * with a click listener button
+     * @param addresses is the supplier email.
+     * @param subject is the email's header with the supplier's name.
+     */
     public void composeEmail(String addresses, String subject) {
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:")); // only email apps should handle this

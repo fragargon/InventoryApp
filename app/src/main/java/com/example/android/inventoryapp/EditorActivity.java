@@ -531,7 +531,7 @@ public class EditorActivity extends AppCompatActivity implements
             int nameColumnIndex = data.getColumnIndex(StoreEntry.COLUMN_PRODUCT_NAME);
             int priceColumnIndex = data.getColumnIndex(StoreEntry.COLUMN_PRICE);
             int quantityColumnIndex = data.getColumnIndex(StoreEntry.COLUMN_QUANTITY);
-            int supplierColumnIndex = data.getColumnIndex(StoreEntry.COLUMN_SUPPLIER_PHONE);
+            int supplierColumnIndex = data.getColumnIndex(StoreEntry.COLUMN_SUPPLIER_NAME);
             int emailColumnIndex = data.getColumnIndex(StoreEntry.COLUMN_SUPPLIER_EMAIL);
             int phoneColumnIndex = data.getColumnIndex(StoreEntry.COLUMN_SUPPLIER_PHONE);
 
@@ -546,7 +546,7 @@ public class EditorActivity extends AppCompatActivity implements
 
             // Update the views on the screen with the values from the database.
             productName.setText(name);
-            productPrice.setText(String.format("%.2f", price));
+            productPrice.setText(String.format(Float.toString(price), Locale.getDefault()));
             productQuantity.setText(String.format(Integer.toString(quantity), Locale.getDefault()));
             supplierName.setText(supplier);
             supplierEmail.setText(email);

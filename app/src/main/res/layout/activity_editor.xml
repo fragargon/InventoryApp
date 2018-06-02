@@ -57,7 +57,8 @@
                     android:id="@+id/edit_product_name"
                     style="@style/edit_text"
                     android:hint="@string/hint_name"
-                    android:inputType="textAutoComplete"/>
+                    android:inputType="textCapCharacters"
+                    android:maxLength="20"/>
             </LinearLayout>
 
             <LinearLayout
@@ -73,7 +74,8 @@
                     android:id="@+id/edit_product_price"
                     style="@style/edit_text"
                     android:hint="@string/hint_price"
-                    android:inputType="numberDecimal"/>
+                    android:inputType="numberDecimal"
+                    android:maxLength="6"/>
 
             </LinearLayout>
 
@@ -98,7 +100,8 @@
                     style="@style/edit_text"
                     android:layout_weight="1"
                     android:hint="@string/hint_price"
-                    android:inputType="number"/>
+                    android:inputType="number"
+                    android:maxLength="3"/>
 
                 <ImageButton
                     android:id="@+id/edit_btn_del"
@@ -143,7 +146,7 @@
                     android:id="@+id/edit_supplier_name"
                     style="@style/edit_text"
                     android:hint="@string/hint_name"
-                    android:inputType="textCapSentences"/>
+                    android:inputType="textPersonName"/>
 
             </LinearLayout>
 
@@ -160,7 +163,7 @@
                     android:id="@+id/edit_supplier_mail"
                     style="@style/edit_text"
                     android:hint="@string/hint_email"
-                    android:inputType="textCapSentences"/>
+                    android:inputType="textEmailAddress"/>
 
                 <ImageButton
                     android:id="@+id/edit_btn_send_mail"

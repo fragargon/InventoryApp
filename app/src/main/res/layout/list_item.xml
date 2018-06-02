@@ -61,6 +61,7 @@
                 <TextView
                     android:id="@+id/list_product_quantity"
                     style="@style/main_text_view"
+                    android:background="@color/colorSpinner"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="@dimen/value_8"
                     android:textSize="20sp"

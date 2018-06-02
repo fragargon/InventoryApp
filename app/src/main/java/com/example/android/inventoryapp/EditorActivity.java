@@ -396,9 +396,6 @@ public class EditorActivity extends AppCompatActivity implements
                 Toast.makeText(this, getString(R.string.update_successful),
                         Toast.LENGTH_SHORT).show();
             }
-
-            // Exit Activity
-            finish();
         }
     }
 

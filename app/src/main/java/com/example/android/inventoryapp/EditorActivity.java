@@ -285,139 +285,127 @@ public class EditorActivity extends AppCompatActivity implements
 
         // Check if this is supposed to be a new product
         // and check if all the fields in the editor are blank
-        if(currentProductUri == null && TextUtils.isEmpty(nameProduct) &&
-                TextUtils.isEmpty(priceString) && TextUtils.isEmpty(quantityString) &&
-                TextUtils.isEmpty(nameSupplier) && TextUtils.isEmpty(email) &&
+        if(currentProductUri == null &&
+                TextUtils.isEmpty(nameProduct) &&
+                TextUtils.isEmpty(priceString) &&
+                TextUtils.isEmpty(quantityString) &&
+                TextUtils.isEmpty(nameSupplier) &&
+                TextUtils.isEmpty(email) &&
                 TextUtils.isEmpty(phone)) {
             // Since no fields were modified, return early.
-            return;
-        }
-
-        // Create a ContentValue object where columns name are the key.
-        ContentValues values = new ContentValues();
-
-        // set the spinner product title id.
-        values.put(StoreEntry.COLUMN_PRODUCT_TITLE, selectedProduct);
-
-        // Check if the fields product name is fulfill by the user.
-        if(!TextUtils.isEmpty(nameProduct)) {
-            values.put(StoreEntry.COLUMN_PRODUCT_NAME, nameProduct);
-        } else {
-            // if blank display an error.
-            productName.requestFocus();
-            productName.setError(getString(R.string.error_empty_product_name));
-            return;
-        }
-
-        // Check if the fields product price is fulfill by the user.
-        // parse priceString into an float dataType..
-        float price;
-        if(!TextUtils.isEmpty(priceString)) {
-            price = Float.parseFloat(priceString);
-            values.put(StoreEntry.COLUMN_PRICE, price);
-        } else {
-            // if blank display an error.
-            productPrice.requestFocus();
-            productPrice.setError(getString(R.string.error_empty_product_price));
-            return;
-        }
-
-        // Check if the fields product quantity is fulfill by the user.
-        // parse quantityString into an int dataType..
-        int quantity;
-        if(!TextUtils.isEmpty(quantityString)) {
-            quantity = Integer.parseInt(quantityString);
-            values.put(StoreEntry.COLUMN_QUANTITY, quantity);
-        } else {
-            // if blank display an error.
-            productQuantity.requestFocus();
-            productQuantity.setError(getString(R.string.error_empty_product_quantity));
-            return;
-        }
-
-        // Check if the fields supplier name is fulfill by the user.
-        if(!TextUtils.isEmpty(nameSupplier)) {
-            values.put(StoreEntry.COLUMN_SUPPLIER_NAME, nameSupplier);
-        } else {
-            // if blank display an error.
-            supplierName.requestFocus();
-            supplierName.setError(getString(R.string.error_empty_supplier_name));
-            return;
-        }
-
-        // Check if the fields supplier email is fulfill by the user.
-        if(!TextUtils.isEmpty(email) || (Patterns.EMAIL_ADDRESS.matcher(email).matches())) {
-            values.put(StoreEntry.COLUMN_SUPPLIER_EMAIL, email);
-        } else {
-            // if blank display an error.
-            supplierEmail.requestFocus();
-            supplierEmail.setError(getString(R.string.error_empty_supplier_email));
-            return;
-        }
-
-        // Check if the fields supplier email is fulfill by the user.
-        if(!TextUtils.isEmpty(phone)) {
-            values.put(StoreEntry.COLUMN_SUPPLIER_PHONE, phone);
-        } else {
-            // if blank display an error.
-            supplierPhone.requestFocus();
-            supplierPhone.setError(getString(R.string.error_empty_supplier_phone));
-            return;
-        }
-
-        // Determine if this is a new or existing pet by checking if mCurrentPetUri is null or not.
-        if(currentProductUri == null) {
-            // This is a new product, so insert a new product into the provider,
-            // Pass the URI in the database
-            Uri newUri = getContentResolver().insert(StoreEntry.CONTENT_URI, values);
-
-            // Show a text message if the insertion is successful or not.
-            if(newUri == null) {
-                // if the rowId is -1, insertion failed.
-                Toast.makeText(this, getString(R.string.insertion_failed),
-                        Toast.LENGTH_SHORT).show();
-            } else {
-                // insertion is successful.
-                Toast.makeText(this, getString(R.string.insertion_successful),
-                        Toast.LENGTH_SHORT).show();
-            }
-
-        } else {
-            // Otherwise this is an EXISTING product, so update the pet with content URI: currentProductUri.
-            int rowsUpdated = getContentResolver().update(currentProductUri, values, null, null);
-
-            // Show a text message if the update is successful or not.
-            if(rowsUpdated == 0) {
-                // if no row is affected.
-                Toast.makeText(this, getString(R.string.update_failed),
-                        Toast.LENGTH_SHORT).show();
-            } else {
-                // update row is successful.
-                Toast.makeText(this, getString(R.string.update_successful),
-                        Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    /**
-     * Helper method to check that all fields are fulfill
-     */
-    private void checkAllField() {
-        // Check if this is supposed to be a new product
-        // and check if all the fields in the editor are fulfill
-        if(currentProductUri == null &&
-                TextUtils.isEmpty(nameProduct) ||
-                TextUtils.isEmpty(priceString) ||
-                TextUtils.isEmpty(quantityString) ||
-                TextUtils.isEmpty(nameSupplier) ||
-                TextUtils.isEmpty(email) ||
-                TextUtils.isEmpty(phone)) {
-            // Since no fields were modified, popup a message..
-            Toast.makeText(this, getString(R.string.error_fulfill_all_the_field)
-                    , Toast.LENGTH_SHORT).show();
-        } else {
             //exit the activity
             finish();
+        } else {
+
+            // Create a ContentValue object where columns name are the key.
+            ContentValues values = new ContentValues();
+
+            // set the spinner product title id.
+            values.put(StoreEntry.COLUMN_PRODUCT_TITLE, selectedProduct);
+
+            // Check if the fields product name is fulfill by the user.
+            if(!TextUtils.isEmpty(nameProduct)) {
+                values.put(StoreEntry.COLUMN_PRODUCT_NAME, nameProduct);
+            } else {
+                // if blank display an error.
+                productName.requestFocus();
+                productName.setError(getString(R.string.error_empty_product_name));
+                return;
+            }
+
+            // Check if the fields product price is fulfill by the user.
+            // parse priceString into an float dataType..
+            float price;
+            if(!TextUtils.isEmpty(priceString)) {
+                price = Float.parseFloat(priceString);
+                values.put(StoreEntry.COLUMN_PRICE, price);
+            } else {
+                // if blank display an error.
+                productPrice.requestFocus();
+                productPrice.setError(getString(R.string.error_empty_product_price));
+                return;
+            }
+
+            // Check if the fields product quantity is fulfill by the user.
+            // parse quantityString into an int dataType..
+            int quantity;
+            if(!TextUtils.isEmpty(quantityString)) {
+                quantity = Integer.parseInt(quantityString);
+                values.put(StoreEntry.COLUMN_QUANTITY, quantity);
+            } else {
+                // if blank display an error.
+                productQuantity.requestFocus();
+                productQuantity.setError(getString(R.string.error_empty_product_quantity));
+                return;
+            }
+
+            // Check if the fields supplier name is fulfill by the user.
+            if(!TextUtils.isEmpty(nameSupplier)) {
+                values.put(StoreEntry.COLUMN_SUPPLIER_NAME, nameSupplier);
+            } else {
+                // if blank display an error.
+                supplierName.requestFocus();
+                supplierName.setError(getString(R.string.error_empty_supplier_name));
+                return;
+            }
+
+            // Check if the fields supplier email is fulfill by the user.
+            if(!TextUtils.isEmpty(email) || (Patterns.EMAIL_ADDRESS.matcher(email).matches())) {
+                values.put(StoreEntry.COLUMN_SUPPLIER_EMAIL, email);
+            } else {
+                // if blank display an error.
+                supplierEmail.requestFocus();
+                supplierEmail.setError(getString(R.string.error_empty_supplier_email));
+                return;
+            }
+
+            // Check if the fields supplier email is fulfill by the user.
+            if(!TextUtils.isEmpty(phone)) {
+                values.put(StoreEntry.COLUMN_SUPPLIER_PHONE, phone);
+            } else {
+                // if blank display an error.
+                supplierPhone.requestFocus();
+                supplierPhone.setError(getString(R.string.error_empty_supplier_phone));
+                return;
+            }
+
+            // Determine if this is a new or existing pet by checking if mCurrentPetUri is null or not.
+            if(currentProductUri == null) {
+                // This is a new product, so insert a new product into the provider,
+                // Pass the URI in the database
+                Uri newUri = getContentResolver().insert(StoreEntry.CONTENT_URI, values);
+
+                // Show a text message if the insertion is successful or not.
+                if(newUri == null) {
+                    // if the rowId is -1, insertion failed.
+                    Toast.makeText(this, getString(R.string.insertion_failed),
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    // insertion is successful.
+                    Toast.makeText(this, getString(R.string.insertion_successful),
+                            Toast.LENGTH_SHORT).show();
+                }
+                //exit the activity
+                finish();
+
+            } else {
+                // Otherwise this is an EXISTING product, so update the pet with content URI: currentProductUri.
+                int rowsUpdated = getContentResolver().update(currentProductUri, values, null, null);
+
+                // Show a text message if the update is successful or not.
+                if(rowsUpdated == 0) {
+                    // if no row is affected.
+                    Toast.makeText(this, getString(R.string.update_failed),
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    // update row is successful.
+                    Toast.makeText(this, getString(R.string.update_successful),
+                            Toast.LENGTH_SHORT).show();
+                }
+                //exit the activity
+                finish();
+            }
+
         }
     }
 
@@ -465,7 +453,6 @@ public class EditorActivity extends AppCompatActivity implements
             case R.id.action_save:
                 // Save pet into database
                 saveProduct();
-                checkAllField();
                 return true;
             case R.id.action_detele:
                 // Pop up confirmation dialog for deletion

@@ -8,6 +8,7 @@ import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -770,11 +771,21 @@ public class EditorActivity extends AppCompatActivity implements
      * @param phoneNumber is the supplier's phone number
      */
     public void dialPhoneNumber(String phoneNumber) {
-        Intent intent = new Intent(Intent.ACTION_DIAL);
-        intent.setData(Uri.parse("tel:" + phoneNumber));
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
+        // Check that there is Telephony hardware
+        PackageManager pm = getPackageManager();
+        if(pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY)) {
+            // Start intent dial supplier number
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse("tel:" + phoneNumber));
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            }
+        } else {
+            // pop a toast message to warn user there is no telephony hardware available.
+            Toast.makeText(this, getString(R.string.no_cell_network), Toast.LENGTH_SHORT).show();
         }
+
+
     }
 
     /**

@@ -98,4 +98,7 @@
     <!-- Label to handle the email messages [CHAR LIMIT=50] -->
     <string name="header_message">Dear Sr %1$s</string>
 
+    <!-- Label to handle message if no cell networks available -->
+    <string name="no_cell_network">No network id, can\'t make calls</string>
+
 </resources>

@@ -9,15 +9,13 @@
 
     <ListView
         android:id="@+id/list_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/layout_container_wide"
         android:padding="@dimen/value_16" />
 
     <!-- Empty view is only visible when the list has no items. -->
     <LinearLayout
         android:id="@+id/empty_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/layout_container_wide"
         android:layout_centerInParent="true"
         android:gravity="center"
         android:orientation="vertical">
@@ -47,8 +45,7 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/layout_container_wrap"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="@dimen/value_16"

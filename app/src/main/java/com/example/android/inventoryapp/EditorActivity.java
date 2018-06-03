@@ -272,6 +272,50 @@ public class EditorActivity extends AppCompatActivity implements
     }
 
     /**
+     * Helper method display an error message if input field are left blank.
+     * It will display an error on all the field at once save menu is clicked
+     */
+    private void displayError() {
+        // if input field is blank display an error on all the blank fields at once.
+
+        // Product name
+        if(TextUtils.isEmpty(nameProduct)) {
+            productName.requestFocus();
+            productName.setError(getString(R.string.error_empty_product_name));
+        }
+
+        // product price
+        if(TextUtils.isEmpty(priceString)) {
+            productPrice.requestFocus();
+            productPrice.setError(getString(R.string.error_empty_product_price));
+        }
+
+        // Product quantity
+        if(TextUtils.isEmpty(quantityString)) {
+            productQuantity.requestFocus();
+            productQuantity.setError(getString(R.string.error_empty_product_quantity));
+        }
+
+        // Supplier name
+        if(TextUtils.isEmpty(nameSupplier)) {
+            supplierName.requestFocus();
+            supplierName.setError(getString(R.string.error_empty_supplier_name));
+        }
+
+        // Supplier email
+        if(TextUtils.isEmpty(email)) {
+            supplierEmail.requestFocus();
+            supplierEmail.setError(getString(R.string.error_empty_supplier_email));
+        }
+
+        // Supplier phone
+        if(TextUtils.isEmpty(phone)) {
+            supplierPhone.requestFocus();
+            supplierPhone.setError(getString(R.string.error_empty_supplier_phone));
+        }
+    }
+
+    /**
      * Helper method to get editor inputs, valid them and save them in the database.
      * If currentProductUri is null means this is a new entry in the database catalog.
      * Otherwise it updates the rows in the product table.
@@ -296,8 +340,7 @@ public class EditorActivity extends AppCompatActivity implements
                 TextUtils.isEmpty(nameSupplier) &&
                 TextUtils.isEmpty(email) &&
                 TextUtils.isEmpty(phone)) {
-            // Since no fields were modified, return early.
-            //exit the activity
+            // Since no fields were modified, exit the activity.
             finish();
         } else {
 
@@ -312,8 +355,7 @@ public class EditorActivity extends AppCompatActivity implements
                 values.put(StoreEntry.COLUMN_PRODUCT_NAME, nameProduct);
             } else {
                 // if blank display an error.
-                productName.requestFocus();
-                productName.setError(getString(R.string.error_empty_product_name));
+                displayError();
                 return;
             }
 
@@ -325,8 +367,7 @@ public class EditorActivity extends AppCompatActivity implements
                 values.put(StoreEntry.COLUMN_PRICE, price);
             } else {
                 // if blank display an error.
-                productPrice.requestFocus();
-                productPrice.setError(getString(R.string.error_empty_product_price));
+                displayError();
                 return;
             }
 
@@ -338,8 +379,7 @@ public class EditorActivity extends AppCompatActivity implements
                 values.put(StoreEntry.COLUMN_QUANTITY, quantity);
             } else {
                 // if blank display an error.
-                productQuantity.requestFocus();
-                productQuantity.setError(getString(R.string.error_empty_product_quantity));
+                displayError();
                 return;
             }
 
@@ -348,8 +388,7 @@ public class EditorActivity extends AppCompatActivity implements
                 values.put(StoreEntry.COLUMN_SUPPLIER_NAME, nameSupplier);
             } else {
                 // if blank display an error.
-                supplierName.requestFocus();
-                supplierName.setError(getString(R.string.error_empty_supplier_name));
+                displayError();
                 return;
             }
 
@@ -358,8 +397,7 @@ public class EditorActivity extends AppCompatActivity implements
                 values.put(StoreEntry.COLUMN_SUPPLIER_EMAIL, email);
             } else {
                 // if blank display an error.
-                supplierEmail.requestFocus();
-                supplierEmail.setError(getString(R.string.error_empty_supplier_email));
+                displayError();
                 return;
             }
 
@@ -368,8 +406,7 @@ public class EditorActivity extends AppCompatActivity implements
                 values.put(StoreEntry.COLUMN_SUPPLIER_PHONE, phone);
             } else {
                 // if blank display an error.
-                supplierPhone.requestFocus();
-                supplierPhone.setError(getString(R.string.error_empty_supplier_phone));
+                displayError();
                 return;
             }
 

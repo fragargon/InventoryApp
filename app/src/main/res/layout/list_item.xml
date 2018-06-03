@@ -9,6 +9,8 @@
     <android.support.v7.widget.CardView
         android:id="@+id/list_card_view"
         style="@style/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/value_4"
         app:contentPadding="@dimen/value_8">
 

@@ -36,10 +36,16 @@
 
     <!-- View style -->
 
-    <!-- editor root layout -->
-    <style name="editor_root_layout" parent="layout_container_match">
+    <!-- editor root layout portrait -->
+    <style name="editor_root_layout_portrait" parent="layout_container_match">
         <item name="android:background">@drawable/background</item>
         <item name="android:orientation">vertical</item>
+    </style>
+
+    <!-- editor root layout landscape -->
+    <style name="editor_root_layout_landscape" parent="layout_container_match">
+        <item name="android:background">@drawable/background</item>
+        <item name="android:orientation">horizontal</item>
     </style>
 
     <!-- list_item root layout -->
@@ -48,10 +54,8 @@
         <item name="android:orientation">vertical</item>
     </style>
 
-    <!-- card view style -->
+    <!-- card view portrait style -->
     <style name="card_view" parent="@style/CardView">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
         <item name="cardElevation">6dp</item>
         <item name="cardBackgroundColor">@color/colorCardView</item>
     </style>

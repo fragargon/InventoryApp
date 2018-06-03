@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/editor_root_layout_portrait"
+    style="@style/editor_root_layout_landscape"
     android:gravity="center_vertical">
 
     <!-- CardView product description -->
     <android.support.v7.widget.CardView
         style="@style/card_view"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:layout_margin="@dimen/value_8"
+        app:cardBackgroundColor="@color/colorCardView"
         app:contentPadding="@dimen/value_8">
 
         <RelativeLayout
-            style="@style/layout_container_wide">
+            style="@style/layout_container_wrap">
 
             <TextView
                 android:id="@+id/editor_overview"
@@ -112,14 +114,14 @@
     <!-- CardView product description -->
     <android.support.v7.widget.CardView
         style="@style/card_view"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:layout_margin="@dimen/value_8"
         app:contentPadding="@dimen/value_8">
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            style="@style/layout_container_wrap">
 
             <TextView
                 android:id="@+id/supplier_overview"
@@ -192,10 +194,6 @@
                     android:src="@drawable/ic_phone"/>
 
             </LinearLayout>
-
-
         </RelativeLayout>
-
     </android.support.v7.widget.CardView>
-
 </LinearLayout>

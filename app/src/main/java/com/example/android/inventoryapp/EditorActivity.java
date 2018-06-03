@@ -65,6 +65,8 @@ public class EditorActivity extends AppCompatActivity implements
     String nameSupplier;
     String email;
     String phone;
+    int newStock;
+    String stock = "1";
 
     /**
      * Type of product selected, the possible value are:
@@ -131,8 +133,8 @@ public class EditorActivity extends AppCompatActivity implements
             public void onClick(View v) {
                 String stock = productQuantity.getText().toString().trim();
                 if(!TextUtils.isEmpty(stock)) {
-                    int addStock = Integer.parseInt(stock);
-                    productQuantity.setText(String.valueOf(addStock + 1));
+                    newStock = Integer.parseInt(stock);
+                    productQuantity.setText(String.valueOf(newStock + 1));
                 } else {
                     Toast.makeText(EditorActivity.this, getString(R.string.error_empty_product_price),
                             Toast.LENGTH_SHORT).show();
@@ -146,13 +148,26 @@ public class EditorActivity extends AppCompatActivity implements
         btnDelItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String stock = productQuantity.getText().toString().trim();
-                int delStock = Integer.parseInt(stock);
-                if(delStock >= 1) {
-                    productQuantity.setText(String.valueOf(delStock - 1));
+                // Determine if this is a new product.
+                if (currentProductUri == null) {
+                    newStock = Integer.parseInt(stock);
+                    if (newStock >= 1) {
+                        productQuantity.setText(String.valueOf(newStock - 1));
+                    } else {
+                        Toast.makeText(EditorActivity.this, getString(R.string.error_empty_product_quantity_zero),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    // this is an existing product.
                 } else {
-                    Toast.makeText(EditorActivity.this, getString(R.string.error_empty_product_quantity_zero),
-                            Toast.LENGTH_SHORT).show();
+                    String stock = productQuantity.getText().toString().trim();
+                    newStock = Integer.parseInt(stock);
+                    if (newStock >= 1) {
+                        productQuantity.setText(String.valueOf(newStock - 1));
+                    } else {
+                        Toast.makeText(EditorActivity.this, getString(R.string.error_empty_product_quantity_zero),
+                                Toast.LENGTH_SHORT).show();
+                    }
+
                 }
 
             }
@@ -276,7 +291,7 @@ public class EditorActivity extends AppCompatActivity implements
      * It will display an error on all the field at once save menu is clicked
      */
     private void displayError() {
-        // if input field is blank display an error on all the blank fields at once.
+        // if input field is blank display an error on all the fields left blank at once.
 
         // Product name
         if(TextUtils.isEmpty(nameProduct)) {
@@ -313,6 +328,7 @@ public class EditorActivity extends AppCompatActivity implements
             supplierPhone.requestFocus();
             supplierPhone.setError(getString(R.string.error_empty_supplier_phone));
         }
+
     }
 
     /**

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- This is the drop-down spinner option -->
+    <!-- Array for the drop-down spinner option -->
     <string-array name="product_type">
         <item>@string/product_title_0</item>
         <item>@string/product_title_1</item>
@@ -10,5 +10,53 @@
         <item>@string/product_title_5</item>
         <item>@string/product_title_6</item>
         <item>@string/product_title_7</item>
+    </string-array>
+
+    <!-- Array for the dummy data (product name) -->
+    <string-array name="product_name">
+        <item>@string/product_name_0</item>
+        <item>@string/product_name_1</item>
+        <item>@string/product_name_2</item>
+        <item>@string/product_name_3</item>
+        <item>@string/product_name_4</item>
+        <item>@string/product_name_5</item>
+        <item>@string/product_name_6</item>
+        <item>@string/product_name_7</item>
+    </string-array>
+
+    <!-- Array for the dummy data (supplier name) -->
+    <string-array name="supplier_name">
+        <item>@string/supplier_name_0</item>
+        <item>@string/supplier_name_1</item>
+        <item>@string/supplier_name_2</item>
+        <item>@string/supplier_name_3</item>
+        <item>@string/supplier_name_4</item>
+        <item>@string/supplier_name_5</item>
+        <item>@string/supplier_name_6</item>
+        <item>@string/supplier_name_7</item>
+    </string-array>
+
+    <!-- Array for the dummy data (supplier email) -->
+    <string-array name="supplier_email">
+        <item>@string/supplier_email_0</item>
+        <item>@string/supplier_email_1</item>
+        <item>@string/supplier_email_2</item>
+        <item>@string/supplier_email_3</item>
+        <item>@string/supplier_email_4</item>
+        <item>@string/supplier_email_5</item>
+        <item>@string/supplier_email_6</item>
+        <item>@string/supplier_email_7</item>
+    </string-array>
+
+    <!-- Array for the dummy data (supplier phone) -->
+    <string-array name="supplier_phone">
+        <item>@string/supplier_phone_0</item>
+        <item>@string/supplier_phone_1</item>
+        <item>@string/supplier_phone_2</item>
+        <item>@string/supplier_phone_3</item>
+        <item>@string/supplier_phone_4</item>
+        <item>@string/supplier_phone_5</item>
+        <item>@string/supplier_phone_6</item>
+        <item>@string/supplier_phone_7</item>
     </string-array>
 </resources>

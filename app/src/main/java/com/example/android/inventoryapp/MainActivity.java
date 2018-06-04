@@ -24,6 +24,8 @@ import android.widget.Toast;
 import com.example.android.inventoryapp.adapter.StoreCursorAdapter;
 import com.example.android.inventoryapp.data.StoreContract.StoreEntry;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements
     private static final int STORE_LOADER = 0;
 
     // Initialize various class
+    Random random = new Random();
     StoreCursorAdapter cursorAdapter;
     Intent intent;
 
@@ -81,17 +84,33 @@ public class MainActivity extends AppCompatActivity implements
         getLoaderManager().initLoader(STORE_LOADER, null, this);
     }
 
+    /**
+     * Helper method to insert dummy product
+     */
     private void insertDummyData() {
+
+        // Instantiate the arrays for the insertion
+        String[] name = getResources().getStringArray(R.array.product_name);
+        String[] supplier = getResources().getStringArray(R.array.supplier_name);
+        String[] email = getResources().getStringArray(R.array.supplier_email);
+        String[] phone = getResources().getStringArray(R.array.supplier_phone);
+
+        // Generate a random number index between 0 - 7
+        int index = random.nextInt(8);
+        // Generate a random quantity between 0-98
+        int quantity = random.nextInt(100);
+        // Generate a random price (float number) between 0 - 998
+        float price = random.nextFloat() * (999 - 1);
 
         // Create a ContentValue object where columns name are the key.
         ContentValues values = new ContentValues();
-        values.put(StoreEntry.COLUMN_PRODUCT_TITLE, 2);
-        values.put(StoreEntry.COLUMN_PRODUCT_NAME, "dfhg");
-        values.put(StoreEntry.COLUMN_PRICE, 25);
-        values.put(StoreEntry.COLUMN_QUANTITY, 10);
-        values.put(StoreEntry.COLUMN_SUPPLIER_NAME, "dsfgeszg");
-        values.put(StoreEntry.COLUMN_SUPPLIER_EMAIL, "dgh@feg.vf");
-        values.put(StoreEntry.COLUMN_SUPPLIER_PHONE, "55555555");
+        values.put(StoreEntry.COLUMN_PRODUCT_TITLE, index);
+        values.put(StoreEntry.COLUMN_PRODUCT_NAME, name[index]);
+        values.put(StoreEntry.COLUMN_PRICE, price);
+        values.put(StoreEntry.COLUMN_QUANTITY, quantity);
+        values.put(StoreEntry.COLUMN_SUPPLIER_NAME, supplier[index]);
+        values.put(StoreEntry.COLUMN_SUPPLIER_EMAIL, email[index]);
+        values.put(StoreEntry.COLUMN_SUPPLIER_PHONE, phone[index]);
         // This is a new product, so insert a new product into the provider,
         // Pass the URI in the database
         Uri newUri = getContentResolver().insert(StoreEntry.CONTENT_URI, values);
@@ -103,7 +122,6 @@ public class MainActivity extends AppCompatActivity implements
             Toast.makeText(this, getString(R.string.insertion_successful),
                     Toast.LENGTH_SHORT).show();
         }
-
     }
 
     /**

@@ -3,6 +3,7 @@ package com.example.android.inventoryapp;
 import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.android.inventoryapp.adapter.StoreCursorAdapter;
 import com.example.android.inventoryapp.data.StoreContract.StoreEntry;
@@ -79,6 +81,31 @@ public class MainActivity extends AppCompatActivity implements
         getLoaderManager().initLoader(STORE_LOADER, null, this);
     }
 
+    private void insertDummyData() {
+
+        // Create a ContentValue object where columns name are the key.
+        ContentValues values = new ContentValues();
+        values.put(StoreEntry.COLUMN_PRODUCT_TITLE, 2);
+        values.put(StoreEntry.COLUMN_PRODUCT_NAME, "dfhg");
+        values.put(StoreEntry.COLUMN_PRICE, 25);
+        values.put(StoreEntry.COLUMN_QUANTITY, 10);
+        values.put(StoreEntry.COLUMN_SUPPLIER_NAME, "dsfgeszg");
+        values.put(StoreEntry.COLUMN_SUPPLIER_EMAIL, "dgh@feg.vf");
+        values.put(StoreEntry.COLUMN_SUPPLIER_PHONE, "55555555");
+        // This is a new product, so insert a new product into the provider,
+        // Pass the URI in the database
+        Uri newUri = getContentResolver().insert(StoreEntry.CONTENT_URI, values);
+        // Show a toast message depending on whether or not the insertion was successful
+        if (newUri == null) {
+            Toast.makeText(this, getString(R.string.insertion_failed),
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, getString(R.string.insertion_successful),
+                    Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
     /**
      * Initialize the contents of the Activity's standard options menu.
      *
@@ -106,6 +133,10 @@ public class MainActivity extends AppCompatActivity implements
             case R.id.action_delete_all:
                 // Respond to a click on the "Delete all entries" menu option
                 showDialogDeleteConfirmation();
+                return true;
+            case R.id.action_add_product:
+                // Respond to a click on the "Add product" menu option
+                insertDummyData();
                 return true;
         }
         return super.onOptionsItemSelected(item);

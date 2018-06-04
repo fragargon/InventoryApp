@@ -8,6 +8,9 @@
     <!-- Label for overflow menu option that deletes all store data in the app [CHAR LIMIT=20] -->
     <string name="action_delete_all_entries">Delete All Items</string>
 
+    <!-- Label for overflow menu option that inserts fake product data into the app [CHAR LIMIT=20] -->
+    <string name="action_insert_dummy_data">Add a product</string>
+
     <!-- Label for editor menu option to save store and leave editor [CHAR LIMIT=20] -->
     <string name="action_save">Save</string>
 

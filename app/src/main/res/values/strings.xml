@@ -24,7 +24,7 @@
     <!-- Label for the empty view when no data are available [CHAR LIMIT=50] -->
     <string name="empty_inventory">Inventory is empty!</string>
     <string name="empty_view_info">Get started by adding a product</string>
-    <string name="empty_view_action">Add an item, click on the add \n floating button below.</string>
+    <string name="empty_view_action">Add an item, click on the add \n floating button below. \n Or click on the menu and \n select add product</string>
 
     <!-- Label for textView editor activity's item [CHAR LIMIT=20] -->
     <string name="product_overview">Product overview</string>

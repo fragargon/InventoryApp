@@ -9,20 +9,20 @@
         style="@style/card_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:layout_margin="@dimen/value_8"
+        android:layout_weight="1"
         app:cardBackgroundColor="@color/colorCardView"
         app:contentPadding="@dimen/value_8">
 
-        <RelativeLayout
-            style="@style/layout_container_wrap">
+        <RelativeLayout style="@style/layout_container_wrap">
 
             <TextView
                 android:id="@+id/editor_overview"
                 style="@style/main_text_view"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="@dimen/value_16"
-                android:text="@string/product_overview"/>
+                android:text="@string/product_overview"
+                android:textColor="@color/colorPrimaryDark" />
 
             <LinearLayout
                 android:id="@+id/container_description"
@@ -32,7 +32,8 @@
                 <TextView
                     style="@style/editor_text_view"
                     android:layout_gravity="center_vertical"
-                    android:text="@string/product_title"/>
+                    android:text="@string/product_title"
+                    android:textColor="@color/colorPrimaryDark" />
 
                 <Spinner
                     android:id="@+id/product_spinner"
@@ -40,7 +41,7 @@
                     android:layout_height="@dimen/value_48"
                     android:layout_weight="3"
                     android:popupBackground="@color/colorSpinner"
-                    android:spinnerMode="dropdown"/>
+                    android:spinnerMode="dropdown" />
             </LinearLayout>
 
             <LinearLayout
@@ -50,14 +51,15 @@
 
                 <TextView
                     style="@style/editor_text_view"
-                    android:text="@string/product_name"/>
+                    android:text="@string/product_name"
+                    android:textColor="@color/colorPrimaryDark" />
 
                 <EditText
                     android:id="@+id/edit_product_name"
                     style="@style/edit_text"
                     android:hint="@string/hint_name"
                     android:inputType="textCapCharacters"
-                    android:maxLength="20"/>
+                    android:maxLength="20" />
             </LinearLayout>
 
             <LinearLayout
@@ -67,14 +69,15 @@
 
                 <TextView
                     style="@style/editor_text_view"
-                    android:text="@string/product_price"/>
+                    android:text="@string/product_price"
+                    android:textColor="@color/colorPrimaryDark" />
 
                 <EditText
                     android:id="@+id/edit_product_price"
                     style="@style/edit_text"
                     android:hint="@string/hint_price"
                     android:inputType="numberDecimal"
-                    android:maxLength="6"/>
+                    android:maxLength="6" />
 
             </LinearLayout>
 
@@ -85,30 +88,34 @@
 
                 <TextView
                     style="@style/editor_text_view"
-                    android:text="@string/product_quantity"/>
+                    android:text="@string/product_quantity"
+                    android:textColor="@color/colorPrimaryDark" />
 
                 <ImageButton
                     android:id="@+id/edit_btn_add"
                     style="@style/layout_container_wrap"
                     android:contentDescription="@string/content_description"
-                    android:src="@drawable/ic_exposure_plus_1"/>
+                    android:src="@drawable/ic_exposure_plus_1" />
 
                 <EditText
                     android:id="@+id/edit_product_quantity"
                     style="@style/edit_text"
                     android:layout_weight="1"
+                    android:gravity="center_horizontal"
                     android:hint="@string/hint_price"
                     android:inputType="number"
-                    android:maxLength="3"/>
+                    android:maxLength="3" />
 
                 <ImageButton
                     android:id="@+id/edit_btn_del"
                     style="@style/layout_container_wrap"
                     android:contentDescription="@string/content_description"
-                    android:src="@drawable/ic_exposure_neg_1"/>
+                    android:src="@drawable/ic_exposure_neg_1" />
 
             </LinearLayout>
+
         </RelativeLayout>
+
     </android.support.v7.widget.CardView>
 
     <!-- CardView product description -->
@@ -116,19 +123,19 @@
         style="@style/card_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:layout_margin="@dimen/value_8"
+        android:layout_weight="1"
         app:contentPadding="@dimen/value_8">
 
-        <RelativeLayout
-            style="@style/layout_container_wrap">
+        <RelativeLayout style="@style/layout_container_wrap">
 
             <TextView
                 android:id="@+id/supplier_overview"
                 style="@style/main_text_view"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="@dimen/value_16"
-                android:text="@string/supplier_overview"/>
+                android:text="@string/supplier_overview"
+                android:textColor="@color/colorPrimaryDark" />
 
             <LinearLayout
                 android:id="@+id/container_supplier_name"
@@ -137,13 +144,14 @@
 
                 <TextView
                     style="@style/editor_text_view"
-                    android:text="@string/supplier_name"/>
+                    android:text="@string/supplier_name"
+                    android:textColor="@color/colorPrimaryDark" />
 
                 <EditText
                     android:id="@+id/edit_supplier_name"
                     style="@style/edit_text"
                     android:hint="@string/hint_name"
-                    android:inputType="textPersonName"/>
+                    android:inputType="textPersonName" />
 
             </LinearLayout>
 
@@ -154,20 +162,21 @@
 
                 <TextView
                     style="@style/editor_text_view"
-                    android:text="@string/supplier_email"/>
+                    android:text="@string/supplier_email"
+                    android:textColor="@color/colorPrimaryDark" />
 
                 <EditText
                     android:id="@+id/edit_supplier_mail"
                     style="@style/edit_text"
                     android:hint="@string/hint_email"
-                    android:inputType="textEmailAddress"/>
+                    android:inputType="textEmailAddress" />
 
                 <ImageButton
                     android:id="@+id/edit_btn_send_mail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/content_description"
-                    android:src="@drawable/ic_email"/>
+                    android:src="@drawable/ic_email" />
 
             </LinearLayout>
 
@@ -178,22 +187,26 @@
 
                 <TextView
                     style="@style/editor_text_view"
-                    android:text="@string/supplier_phone"/>
+                    android:text="@string/supplier_phone"
+                    android:textColor="@color/colorPrimaryDark" />
 
                 <EditText
                     android:id="@+id/edit_supplier_phone"
                     style="@style/edit_text"
                     android:hint="@string/hint_phone"
-                    android:inputType="phone"/>
+                    android:inputType="phone" />
 
                 <ImageButton
                     android:id="@+id/edit_btn_call_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/content_description"
-                    android:src="@drawable/ic_phone"/>
+                    android:src="@drawable/ic_phone" />
 
             </LinearLayout>
+
         </RelativeLayout>
+
     </android.support.v7.widget.CardView>
+
 </LinearLayout>

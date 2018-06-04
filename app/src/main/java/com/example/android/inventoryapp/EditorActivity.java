@@ -67,7 +67,7 @@ public class EditorActivity extends AppCompatActivity implements
     String email;
     String phone;
     int newStock;
-    String stock = "1";
+    String stock;
 
     /**
      * Type of product selected, the possible value are:
@@ -97,7 +97,7 @@ public class EditorActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
 
-        // Hide the Keyboard when focus on EditText
+        // Hide the Keyboard focus on EditText
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         // Get the intent that launch this activity
@@ -132,7 +132,7 @@ public class EditorActivity extends AppCompatActivity implements
         btnAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String stock = productQuantity.getText().toString().trim();
+                stock = productQuantity.getText().toString().trim();
                 if(!TextUtils.isEmpty(stock)) {
                     newStock = Integer.parseInt(stock);
                     productQuantity.setText(String.valueOf(newStock + 1));
@@ -149,28 +149,19 @@ public class EditorActivity extends AppCompatActivity implements
         btnDelItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Determine if this is a new product.
-                if (currentProductUri == null) {
-                    newStock = Integer.parseInt(stock);
-                    if (newStock >= 1) {
-                        productQuantity.setText(String.valueOf(newStock - 1));
-                    } else {
-                        Toast.makeText(EditorActivity.this, getString(R.string.error_empty_product_quantity_zero),
-                                Toast.LENGTH_SHORT).show();
-                    }
-                    // this is an existing product.
+                stock = productQuantity.getText().toString().trim();
+                if(currentProductUri == null && TextUtils.isEmpty(stock)) {
+                    Toast.makeText(EditorActivity.this, getString(R.string.error_empty_product_price),
+                            Toast.LENGTH_SHORT).show();
                 } else {
-                    String stock = productQuantity.getText().toString().trim();
                     newStock = Integer.parseInt(stock);
-                    if (newStock >= 1) {
+                    if(!TextUtils.isEmpty(stock) && newStock >= 1) {
                         productQuantity.setText(String.valueOf(newStock - 1));
                     } else {
-                        Toast.makeText(EditorActivity.this, getString(R.string.error_empty_product_quantity_zero),
+                        Toast.makeText(EditorActivity.this, getString(R.string.error_empty_product_price),
                                 Toast.LENGTH_SHORT).show();
                     }
-
                 }
-
             }
         });
 

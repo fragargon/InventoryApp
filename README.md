@@ -44,4 +44,8 @@ ____________
 
 ____________
 
+InventoryApp stage 2
+
+![Alt Text](https://github.com/fragargon/InventoryApp/raw/master/InventoryApp.gif)
+
 

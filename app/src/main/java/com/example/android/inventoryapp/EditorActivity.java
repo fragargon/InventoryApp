@@ -137,7 +137,7 @@ public class EditorActivity extends AppCompatActivity implements
                     newStock = Integer.parseInt(stock);
                     productQuantity.setText(String.valueOf(newStock + 1));
                 } else {
-                    Toast.makeText(EditorActivity.this, getString(R.string.error_empty_product_price),
+                    Toast.makeText(EditorActivity.this, getString(R.string.error_empty_product_quantity_zero),
                             Toast.LENGTH_SHORT).show();
                 }
             }
@@ -151,14 +151,14 @@ public class EditorActivity extends AppCompatActivity implements
             public void onClick(View v) {
                 stock = productQuantity.getText().toString().trim();
                 if(currentProductUri == null && TextUtils.isEmpty(stock)) {
-                    Toast.makeText(EditorActivity.this, getString(R.string.error_empty_product_price),
+                    Toast.makeText(EditorActivity.this, getString(R.string.error_empty_product_quantity_zero),
                             Toast.LENGTH_SHORT).show();
                 } else {
                     newStock = Integer.parseInt(stock);
                     if(!TextUtils.isEmpty(stock) && newStock >= 1) {
                         productQuantity.setText(String.valueOf(newStock - 1));
                     } else {
-                        Toast.makeText(EditorActivity.this, getString(R.string.error_empty_product_price),
+                        Toast.makeText(EditorActivity.this, getString(R.string.error_empty_product_quantity_zero),
                                 Toast.LENGTH_SHORT).show();
                     }
                 }

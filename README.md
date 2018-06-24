@@ -1,4 +1,4 @@
-# Inventory App, Stage 1
+# Inventory App, Stage 1 & Stage 2
 
 *Created as part of Udacity's Android Basics by Google Nanodegree Program*
 ____________

@@ -46,6 +46,6 @@ ____________
 
 InventoryApp stage 2
 
-![Alt Text](https://github.com/fragargon/InventoryApp/raw/master/InventoryApp.gif)
+<img src="https://github.com/fragargon/InventoryApp/raw/master/InventoryApp.gif" height="420" width="240"> 
 
 
